@@ -1,19 +1,19 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "autoznetwork/autoznetwork-php-autoznetwork-php-sdk",
+    "description": "This is my package autoznetwork-php-sdk",
     "type": "library",
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/autoznetwork/autoznetwork-php-autoznetwork-php-sdk",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "VendorName\\SDK\\": "src/",
-            "VendorName\\SDK\\Tests\\": "tests/"
+            "AutozNetwork\\AutozNetwork\\": "src/",
+            "AutozNetwork\\AutozNetwork\\Tests\\": "tests/"
         }
     },
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com"
+            "name": "collinped",
+            "email": "collin@autoznetwork.com"
         }
     ],
     "minimum-stability": "stable",

@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\SDK\Requests;
+namespace AutozNetwork\AutozNetwork\Requests;
 
 use Sammyjo20\Saloon\Http\RequestCollection;
 

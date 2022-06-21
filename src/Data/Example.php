@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\SDK\Data;
+namespace AutozNetwork\AutozNetwork\Data;
 
 use Spatie\DataTransferObject\DataTransferObject;
 

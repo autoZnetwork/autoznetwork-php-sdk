@@ -1,16 +1,16 @@
 <?php
 
-namespace VendorName\SDK;
+namespace AutozNetwork\AutozNetwork;
 
-use VendorName\SDK\Responses\SDKResponse;
+use AutozNetwork\AutozNetwork\Responses\AutozNetworkResponse;
 use Sammyjo20\Saloon\Http\SaloonConnector;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
-use VendorName\SDK\Requests\ExampleRequestCollection;
+use AutozNetwork\AutozNetwork\Requests\ExampleRequestCollection;
 
 /**
  * @method ExampleRequestCollection example
  */
-class SDK extends SaloonConnector
+class AutozNetwork extends SaloonConnector
 {
     use AcceptsJson;
 
@@ -26,10 +26,10 @@ class SDK extends SaloonConnector
      *
      * @var string|null
      */
-    protected ?string $response = SDKResponse::class;
+    protected ?string $response = AutozNetworkResponse::class;
 
     /**
-     * The requests/services on the SDK.
+     * The requests/services on the AutozNetwork.
      *
      * @var array
      */

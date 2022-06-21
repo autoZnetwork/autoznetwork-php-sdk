@@ -1,11 +1,11 @@
 <?php
 
-namespace VendorName\SDK\Exceptions;
+namespace AutozNetwork\AutozNetwork\Exceptions;
 
 use Sammyjo20\Saloon\Http\SaloonResponse;
 use Sammyjo20\Saloon\Exceptions\SaloonRequestException;
 
-class SDKRequestException extends SaloonRequestException
+class AutozNetworkRequestException extends SaloonRequestException
 {
     /**
      * Retrieve the response.

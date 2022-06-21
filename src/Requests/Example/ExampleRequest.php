@@ -1,8 +1,8 @@
 <?php
 
-namespace VendorName\SDK\Requests\Example;
+namespace AutozNetwork\AutozNetwork\Requests\Example;
 
-use VendorName\SDK\Requests\Request;
+use AutozNetwork\AutozNetwork\Requests\Request;
 use Sammyjo20\Saloon\Constants\Saloon;
 
 class ExampleRequest extends Request
