@@ -9,15 +9,13 @@ use AutozNetwork\Requests\OrganizationCollection;
 use AutozNetwork\Responses\AutozNetworkResponse;
 use Sammyjo20\Saloon\Helpers\OAuth2\OAuthConfig;
 use Sammyjo20\Saloon\Http\SaloonConnector;
-use Sammyjo20\Saloon\Interfaces\AuthenticatorInterface;
 use Sammyjo20\Saloon\Traits\OAuth2\AuthorizationCodeGrant;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
 
-class AutozNetwork extends SaloonConnector
+class AutozNetworkAuth extends SaloonConnector
 {
-    use AcceptsJson;
-//    use WithOrganizationID;
+    use AuthorizationCodeGrant;
 
     /**
      * Define the base URL for the API
@@ -66,13 +64,19 @@ class AutozNetwork extends SaloonConnector
      * @param  string|null  $baseUrl
      */
     public function __construct(
-        $authenticator,
-        string $apiUrl = null
+        string $clientId,
+        string $clientSecret,
+        string $redirectUrl,
+        string $authUrl = null
     ) {
-        $this->authenticator = $authenticator;
+        $this->clientId = $clientId;
 
-        if (! is_null($apiUrl)) {
-            $this->apiBaseUrl = $apiUrl;
+        $this->clientSecret = $clientSecret;
+
+        $this->redirectUrl = $redirectUrl;
+
+        if (! is_null($authUrl)) {
+            $this->apiBaseUrl = $authUrl;
         }
     }
 

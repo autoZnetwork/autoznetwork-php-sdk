@@ -4,11 +4,13 @@ namespace AutozNetwork\Requests\Locations;
 
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
+use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
 
 class CreateLocationRequest extends SaloonRequest
 {
     use HasJsonBody;
+    use AcceptsJson;
 
     /**
      * Define the method that the request will use.
