@@ -1,6 +1,6 @@
 <?php
 
-namespace AutozNetwork\AutozNetwork\Exceptions;
+namespace AutozNetwork\Exceptions;
 
 use Exception;
 

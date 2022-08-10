@@ -1,32 +1,44 @@
 <?php
 
-namespace AutozNetwork\AutozNetwork;
+namespace AutozNetwork;
 
-use AutozNetwork\AutozNetwork\Responses\AutozNetworkResponse;
+use AutozNetwork\Plugins\WithOrganizationID;
+use AutozNetwork\Requests\InventoryCollection;
+use AutozNetwork\Requests\LocationCollection;
+use AutozNetwork\Requests\OrganizationCollection;
+use AutozNetwork\Responses\AutozNetworkResponse;
+use Sammyjo20\Saloon\Helpers\OAuth2\OAuthConfig;
 use Sammyjo20\Saloon\Http\SaloonConnector;
+use Sammyjo20\Saloon\Traits\OAuth2\AuthorizationCodeGrant;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
-use AutozNetwork\AutozNetwork\Requests\ExampleRequestCollection;
+use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
 
-/**
- * @method ExampleRequestCollection example
- */
 class AutozNetwork extends SaloonConnector
 {
-    use AcceptsJson;
+    use AuthorizationCodeGrant;
+//    use WithOrganizationID;
 
     /**
      * Define the base URL for the API
      *
      * @var string
      */
-    protected string $apiBaseUrl = ':base_url';
+    protected string $apiBaseUrl = 'https://api.autoznetwork.com';
+
+    private string $clientId;
+
+    private string $clientSecret;
+
+    private string $redirectUrl;
+
+    private array $scopes = ['*'];
 
     /**
      * Custom response that all requests will return.
      *
      * @var string|null
      */
-    protected ?string $response = AutozNetworkResponse::class;
+//    protected ?string $response = AutozNetworkResponse::class;
 
     /**
      * The requests/services on the AutozNetwork.
@@ -34,7 +46,9 @@ class AutozNetwork extends SaloonConnector
      * @var array
      */
     protected array $requests = [
-        'example' => ExampleRequestCollection::class,
+        'organizations' => OrganizationCollection::class,
+        'locations' => LocationCollection::class,
+        'inventory' => InventoryCollection::class,
     ];
 
     /**
@@ -48,23 +62,23 @@ class AutozNetwork extends SaloonConnector
     }
 
     /**
-     * @param string|null $baseUrl
+     * @param  string|null  $baseUrl
      */
-    public function __construct(string $baseUrl = null)
-    {
-        if (isset($baseUrl)) {
+    public function __construct(
+        string $clientId,
+        string $clientSecret,
+        string $redirectUrl,
+        string $baseUrl = null
+    ) {
+        $this->clientId = $clientId;
+
+        $this->clientSecret = $clientSecret;
+
+        $this->redirectUrl = $redirectUrl;
+
+        if (! is_null($baseUrl)) {
             $this->apiBaseUrl = $baseUrl;
         }
-    }
-
-    /**
-     * Define any default headers.
-     *
-     * @return array
-     */
-    public function defaultHeaders(): array
-    {
-        return [];
     }
 
     /**
@@ -76,4 +90,33 @@ class AutozNetwork extends SaloonConnector
     {
         return [];
     }
+
+    /**
+     * Define the default OAuth2 Config.
+     *
+     * @return OAuthConfig
+     */
+    protected function defaultOauthConfig(): OAuthConfig
+    {
+        return OAuthConfig::make()
+            ->setClientId($this->clientId)
+            ->setClientSecret($this->clientSecret)
+            ->setRedirectUri($this->redirectUrl)
+            ->setDefaultScopes($this->scopes)
+            ->setAuthorizeEndpoint('/oauth/authorize')
+            ->setTokenEndpoint('/oauth/token')
+            ->setUserEndpoint('/api/user');
+    }
+
+//    public function scopes(array $scopes): static
+//    {
+//        $this->scopes = $scopes;
+//
+//        return $this;
+//    }
+//
+//    public function setScopes(array $scopes): static
+//    {
+//        return $this->scopes($scopes);
+//    }
 }

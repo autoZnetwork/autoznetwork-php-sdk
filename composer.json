@@ -1,13 +1,13 @@
 {
-    "name": "autoznetwork/autoznetwork-php-autoznetwork-php-sdk",
-    "description": "This is my package autoznetwork-php-sdk",
+    "name": "autoznetwork/autoznetwork-php-sdk",
+    "description": "autoZnetwork PHP SDK",
     "type": "library",
-    "homepage": "https://github.com/autoznetwork/autoznetwork-php-autoznetwork-php-sdk",
+    "homepage": "https://github.com/autoznetwork/autoznetwork-php-sdk",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "AutozNetwork\\AutozNetwork\\": "src/",
-            "AutozNetwork\\AutozNetwork\\Tests\\": "tests/"
+            "AutozNetwork\\": "src/",
+            "AutozNetwork\\Tests\\": "tests/"
         }
     },
     "authors": [
@@ -23,16 +23,16 @@
         "spatie/data-transfer-object": "^3.8"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.5",
         "pestphp/pest": "^1.21",
-        "spatie/ray": "^1.33"
+        "spatie/ray": "^1.33",
+        "laravel/pint": "^0.2.0"
     },
     "scripts": {
         "test": [
             "./vendor/bin/pest"
         ],
         "fix-code": [
-            "./vendor/bin/php-cs-fixer fix"
+            "./vendor/bin/pint"
         ]
     },
     "config": {

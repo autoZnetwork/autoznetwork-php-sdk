@@ -1,11 +1,11 @@
 <?php
 
-namespace AutozNetwork\AutozNetwork\Requests\Example;
+namespace AutozNetwork\Requests\Inventory;
 
-use AutozNetwork\AutozNetwork\Requests\Request;
+use AutozNetwork\Requests\Request;
 use Sammyjo20\Saloon\Constants\Saloon;
 
-class ExampleRequest extends Request
+class GetInventoryRequest extends Request
 {
     /**
      * Define the method that the request will use.
@@ -19,6 +19,11 @@ class ExampleRequest extends Request
      */
     public function defineEndpoint(): string
     {
-        return '/';
+        return '/inventory'.$this->inventoryId;
+    }
+
+    public function __construct(
+        public int $inventoryId
+    ) {
     }
 }
