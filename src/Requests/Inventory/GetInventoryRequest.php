@@ -21,7 +21,7 @@ class GetInventoryRequest extends Request
      */
     public function defineEndpoint(): string
     {
-        return '/inventory'.$this->inventoryId;
+        return '/inventory/'.$this->inventoryId;
     }
 
     public function __construct(
