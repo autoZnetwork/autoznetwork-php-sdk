@@ -1,9 +1,9 @@
 <?php
 
-namespace AutozNetwork\AutozNetwork\Exceptions;
+namespace AutozNetwork\Exceptions;
 
-use Sammyjo20\Saloon\Http\SaloonResponse;
 use Sammyjo20\Saloon\Exceptions\SaloonRequestException;
+use Sammyjo20\Saloon\Http\SaloonResponse;
 
 class AutozNetworkRequestException extends SaloonRequestException
 {

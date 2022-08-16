@@ -1,12 +1,15 @@
 <?php
 
-namespace AutozNetwork\AutozNetwork\Requests\Example;
+namespace AutozNetwork\Requests\Syndications;
 
-use AutozNetwork\AutozNetwork\Requests\Request;
+use AutozNetwork\Requests\Request;
 use Sammyjo20\Saloon\Constants\Saloon;
+use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 
-class ExampleRequest extends Request
+class ListSyndicationsRequest extends Request
 {
+    use AcceptsJson;
+
     /**
      * Define the method that the request will use.
      *
@@ -19,6 +22,6 @@ class ExampleRequest extends Request
      */
     public function defineEndpoint(): string
     {
-        return '/';
+        return '/syndications';
     }
 }

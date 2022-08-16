@@ -1,8 +1,8 @@
 <?php
 
-namespace AutozNetwork\AutozNetwork\Requests;
+namespace AutozNetwork\Requests;
 
-use AutozNetwork\AutozNetwork\AutozNetwork;
+use AutozNetwork\AutozNetwork;
 use Sammyjo20\Saloon\Http\SaloonRequest;
 
 class Request extends SaloonRequest
