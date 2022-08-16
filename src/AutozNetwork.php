@@ -3,9 +3,14 @@
 namespace AutozNetwork;
 
 use AutozNetwork\Plugins\WithOrganizationID;
+use AutozNetwork\Requests\FeedCollection;
 use AutozNetwork\Requests\InventoryCollection;
 use AutozNetwork\Requests\LocationCollection;
 use AutozNetwork\Requests\OrganizationCollection;
+use AutozNetwork\Requests\PermissionCollection;
+use AutozNetwork\Requests\RoleCollection;
+use AutozNetwork\Requests\SyndicationCollection;
+use AutozNetwork\Requests\UserCollection;
 use AutozNetwork\Responses\AutozNetworkResponse;
 use Sammyjo20\Saloon\Helpers\OAuth2\OAuthConfig;
 use Sammyjo20\Saloon\Http\SaloonConnector;
@@ -50,6 +55,11 @@ class AutozNetwork extends SaloonConnector
         'organizations' => OrganizationCollection::class,
         'locations' => LocationCollection::class,
         'inventory' => InventoryCollection::class,
+        'syndications' => SyndicationCollection::class,
+        'feeds' => FeedCollection::class,
+        'roles' => RoleCollection::class,
+        'permissions' => PermissionCollection::class,
+        'users' => UserCollection::class,
     ];
 
     /**

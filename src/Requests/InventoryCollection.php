@@ -51,10 +51,38 @@ class InventoryCollection extends RequestCollection
         return $response->json();
     }
 
+    public function inStock(int $inventorId)
+    {
+        return $this->update($inventorId, [
+            'status' => 'in-stock'
+        ]);
+    }
+
     public function sold(int $inventorId)
     {
         return $this->update($inventorId, [
             'status' => 'sold'
+        ]);
+    }
+
+    public function deposit(int $inventorId)
+    {
+        return $this->update($inventorId, [
+            'status' => 'deposit'
+        ]);
+    }
+
+    public function active(int $inventorId)
+    {
+        return $this->update($inventorId, [
+            'active' => true
+        ]);
+    }
+
+    public function deactivate(int $inventorId)
+    {
+        return $this->update($inventorId, [
+            'active' => false
         ]);
     }
 }
