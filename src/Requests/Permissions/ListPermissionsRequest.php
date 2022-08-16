@@ -9,6 +9,7 @@ use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 class ListPermissionsRequest extends Request
 {
     use AcceptsJson;
+
     /**
      * Define the method that the request will use.
      *

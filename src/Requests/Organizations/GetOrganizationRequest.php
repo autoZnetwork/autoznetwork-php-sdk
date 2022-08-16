@@ -9,6 +9,7 @@ use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 class GetOrganizationRequest extends Request
 {
     use AcceptsJson;
+
     /**
      * Define the method that the request will use.
      *

@@ -2,8 +2,8 @@
 
 namespace AutozNetwork\Requests;
 
-use AutozNetwork\Requests\Roles\ListRolesRequest;
 use AutozNetwork\Requests\Roles\GetRoleRequest;
+use AutozNetwork\Requests\Roles\ListRolesRequest;
 use Sammyjo20\Saloon\Http\RequestCollection;
 
 class RoleCollection extends RequestCollection

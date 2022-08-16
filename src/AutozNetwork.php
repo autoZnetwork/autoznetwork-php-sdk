@@ -14,10 +14,7 @@ use AutozNetwork\Requests\UserCollection;
 use AutozNetwork\Responses\AutozNetworkResponse;
 use Sammyjo20\Saloon\Helpers\OAuth2\OAuthConfig;
 use Sammyjo20\Saloon\Http\SaloonConnector;
-use Sammyjo20\Saloon\Interfaces\AuthenticatorInterface;
-use Sammyjo20\Saloon\Traits\OAuth2\AuthorizationCodeGrant;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
-use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
 
 class AutozNetwork extends SaloonConnector
 {

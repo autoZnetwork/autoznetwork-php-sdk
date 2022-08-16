@@ -11,6 +11,7 @@ class UpdateInventoryRequest extends Request
 {
     use HasJsonBody;
     use AcceptsJson;
+
     /**
      * Define the method that the request will use.
      *

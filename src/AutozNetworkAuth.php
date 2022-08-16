@@ -2,7 +2,6 @@
 
 namespace AutozNetwork;
 
-use AutozNetwork\Plugins\WithOrganizationID;
 use AutozNetwork\Requests\InventoryCollection;
 use AutozNetwork\Requests\LocationCollection;
 use AutozNetwork\Requests\OrganizationCollection;
@@ -10,8 +9,6 @@ use AutozNetwork\Responses\AutozNetworkResponse;
 use Sammyjo20\Saloon\Helpers\OAuth2\OAuthConfig;
 use Sammyjo20\Saloon\Http\SaloonConnector;
 use Sammyjo20\Saloon\Traits\OAuth2\AuthorizationCodeGrant;
-use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
-use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
 
 class AutozNetworkAuth extends SaloonConnector
 {
