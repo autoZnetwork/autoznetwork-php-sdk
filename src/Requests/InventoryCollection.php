@@ -7,6 +7,7 @@ use AutozNetwork\Requests\Inventory\DeleteInventoryRequest;
 use AutozNetwork\Requests\Inventory\GetInventoryRequest;
 use AutozNetwork\Requests\Inventory\ListInventoryRequest;
 use AutozNetwork\Requests\Inventory\UpdateInventoryRequest;
+use AutozNetwork\Traits\RequiresOrganizationID;
 use Sammyjo20\Saloon\Http\RequestCollection;
 
 class InventoryCollection extends RequestCollection

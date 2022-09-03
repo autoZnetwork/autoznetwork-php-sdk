@@ -14,12 +14,13 @@ use AutozNetwork\Requests\UserCollection;
 use AutozNetwork\Responses\AutozNetworkResponse;
 use Sammyjo20\Saloon\Helpers\OAuth2\OAuthConfig;
 use Sammyjo20\Saloon\Http\SaloonConnector;
+use Sammyjo20\Saloon\Traits\Auth\RequiresAuth;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 
 class AutozNetwork extends SaloonConnector
 {
     use AcceptsJson;
-//    use WithOrganizationID;
+    use WithOrganizationID;
 
     /**
      * Define the base URL for the API
@@ -109,16 +110,4 @@ class AutozNetwork extends SaloonConnector
             ->setTokenEndpoint('/oauth/token')
             ->setUserEndpoint('/api/user');
     }
-
-//    public function scopes(array $scopes): static
-//    {
-//        $this->scopes = $scopes;
-//
-//        return $this;
-//    }
-//
-//    public function setScopes(array $scopes): static
-//    {
-//        return $this->scopes($scopes);
-//    }
 }

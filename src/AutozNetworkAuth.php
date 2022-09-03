@@ -29,37 +29,11 @@ class AutozNetworkAuth extends SaloonConnector
 
     private array $scopes = ['*'];
 
-    /**
-     * Custom response that all requests will return.
-     *
-     * @var string|null
-     */
-//    protected ?string $response = AutozNetworkResponse::class;
-
-    /**
-     * The requests/services on the AutozNetwork.
-     *
-     * @var array
-     */
-    protected array $requests = [
-        'organizations' => OrganizationCollection::class,
-        'locations' => LocationCollection::class,
-        'inventory' => InventoryCollection::class,
-    ];
-
-    /**
-     * Define the base URL of the API.
-     *
-     * @return string
-     */
     public function defineBaseUrl(): string
     {
         return $this->apiBaseUrl;
     }
 
-    /**
-     * @param  string|null  $baseUrl
-     */
     public function __construct(
         string $clientId,
         string $clientSecret,
@@ -78,16 +52,6 @@ class AutozNetworkAuth extends SaloonConnector
     }
 
     /**
-     * Define any default config.
-     *
-     * @return array
-     */
-    public function defaultConfig(): array
-    {
-        return [];
-    }
-
-    /**
      * Define the default OAuth2 Config.
      *
      * @return OAuthConfig
@@ -103,6 +67,7 @@ class AutozNetworkAuth extends SaloonConnector
             ->setTokenEndpoint('/oauth/token')
             ->setUserEndpoint('/api/user');
     }
+
 
 //    public function scopes(array $scopes): static
 //    {
