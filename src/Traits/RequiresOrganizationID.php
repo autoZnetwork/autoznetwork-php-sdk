@@ -2,23 +2,23 @@
 
 namespace AutozNetwork\Traits;
 
-use Sammyjo20\Saloon\Http\SaloonRequest;
-use Sammyjo20\Saloon\Interfaces\AuthenticatorInterface;
 use Sammyjo20\Saloon\Exceptions\MissingAuthenticatorException;
+use Sammyjo20\Saloon\Http\SaloonRequest;
 
 trait RequiresOrganizationID
 {
     /**
      * Throw an exception if there was no organization id while it is booting.
      *
-     * @param SaloonRequest $request
+     * @param  SaloonRequest  $request
      * @return void
+     *
      * @throws MissingAuthenticatorException
      * @throws \Sammyjo20\Saloon\Exceptions\SaloonInvalidConnectorException
      */
     public function bootRequiresOrganizationId(SaloonRequest $request): void
     {
-        if (!isset($request->getHeaders()['X-AutozNetwork-Organization-Id'])) {
+        if (! isset($request->getHeaders()['X-AutozNetwork-Organization-Id'])) {
             throw new MissingAuthenticatorException($this->getRequiresOrganizationId($request));
         }
     }
@@ -26,7 +26,7 @@ trait RequiresOrganizationID
     /**
      * Default message.
      *
-     * @param SaloonRequest $request
+     * @param  SaloonRequest  $request
      * @return string
      */
     protected function getRequiresOrganizationId(SaloonRequest $request): string

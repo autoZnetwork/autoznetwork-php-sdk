@@ -1,13 +1,13 @@
 <?php
 
-namespace AutozNetwork\Requests\Inventory;
+namespace AutozNetwork\Requests\Notifications;
 
 use AutozNetwork\Requests\Request;
 use AutozNetwork\Traits\RequiresOrganizationID;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 
-class ListInventoryRequest extends Request
+class GetNotificationRequest extends Request
 {
     use AcceptsJson;
     use RequiresOrganizationID;
@@ -24,16 +24,11 @@ class ListInventoryRequest extends Request
      */
     public function defineEndpoint(): string
     {
-        return '/inventory';
+        return '/notifications/'.$this->notificationId;
     }
 
     public function __construct(
-        public array $filters
+        public int $notificationId
     ) {
-    }
-
-    public function defaultData(): array
-    {
-        return $this->filters;
     }
 }

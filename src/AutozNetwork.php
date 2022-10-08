@@ -6,6 +6,7 @@ use AutozNetwork\Plugins\WithOrganizationID;
 use AutozNetwork\Requests\FeedCollection;
 use AutozNetwork\Requests\InventoryCollection;
 use AutozNetwork\Requests\LocationCollection;
+use AutozNetwork\Requests\NotificationCollection;
 use AutozNetwork\Requests\OrganizationCollection;
 use AutozNetwork\Requests\PermissionCollection;
 use AutozNetwork\Requests\RoleCollection;
@@ -14,7 +15,6 @@ use AutozNetwork\Requests\UserCollection;
 use AutozNetwork\Responses\AutozNetworkResponse;
 use Sammyjo20\Saloon\Helpers\OAuth2\OAuthConfig;
 use Sammyjo20\Saloon\Http\SaloonConnector;
-use Sammyjo20\Saloon\Traits\Auth\RequiresAuth;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 
 class AutozNetwork extends SaloonConnector
@@ -58,6 +58,7 @@ class AutozNetwork extends SaloonConnector
         'roles' => RoleCollection::class,
         'permissions' => PermissionCollection::class,
         'users' => UserCollection::class,
+        'notifications' => NotificationCollection::class,
     ];
 
     /**

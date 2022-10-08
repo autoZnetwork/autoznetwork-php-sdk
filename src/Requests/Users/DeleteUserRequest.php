@@ -3,6 +3,7 @@
 namespace AutozNetwork\Requests\Users;
 
 use AutozNetwork\Requests\Request;
+use AutozNetwork\Traits\RequiresOrganizationID;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
@@ -11,6 +12,7 @@ class DeleteUserRequest extends Request
 {
     use HasJsonBody;
     use AcceptsJson;
+    use RequiresOrganizationID;
 
     /**
      * Define the method that the request will use.

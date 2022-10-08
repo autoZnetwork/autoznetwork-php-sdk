@@ -3,7 +3,7 @@
 namespace AutozNetwork\Requests;
 
 use AutozNetwork\Requests\Locations\DeleteLocationRequest;
-use AutozNetwork\Requests\Locations\GetLocationRequest;
+use AutozNetwork\Requests\Locations\GetNotificationRequest;
 use AutozNetwork\Requests\Locations\ListLocationsRequest;
 use Sammyjo20\Saloon\Http\RequestCollection;
 
@@ -19,7 +19,7 @@ class LocationCollection extends RequestCollection
 
     public function get(int $id)
     {
-        $request = $this->connector->request(new GetLocationRequest($id));
+        $request = $this->connector->request(new GetNotificationRequest($id));
         $response = $request->send();
 
         return $response->json();

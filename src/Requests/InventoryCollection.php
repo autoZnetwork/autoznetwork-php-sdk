@@ -2,19 +2,18 @@
 
 namespace AutozNetwork\Requests;
 
+use AutozNetwork\Requests\Inventory\CreateInventoryImageRequest;
 use AutozNetwork\Requests\Inventory\CreateInventoryRequest;
 use AutozNetwork\Requests\Inventory\DeleteInventoryRequest;
 use AutozNetwork\Requests\Inventory\GetInventoryRequest;
-use AutozNetwork\Requests\Inventory\ListInventoryRequest;
 use AutozNetwork\Requests\Inventory\UpdateInventoryRequest;
-use AutozNetwork\Traits\RequiresOrganizationID;
 use Sammyjo20\Saloon\Http\RequestCollection;
 
 class InventoryCollection extends RequestCollection
 {
-    public function all()
+    public function all($filters = [])
     {
-        $request = $this->connector->request(new ListInventoryRequest);
+        $request = $this->connector->request(new CreateInventoryImageRequest($filters));
         $response = $request->send();
 
         return $response->json();

@@ -1,14 +1,16 @@
 <?php
 
-namespace AutozNetwork\Requests\Inventory;
+namespace AutozNetwork\Requests\Notifications;
 
-use AutozNetwork\Requests\Request;
 use AutozNetwork\Traits\RequiresOrganizationID;
 use Sammyjo20\Saloon\Constants\Saloon;
+use Sammyjo20\Saloon\Http\SaloonRequest;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
+use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
 
-class ListInventoryRequest extends Request
+class CreateNotificationRequest extends SaloonRequest
 {
+    use HasJsonBody;
     use AcceptsJson;
     use RequiresOrganizationID;
 
@@ -17,23 +19,23 @@ class ListInventoryRequest extends Request
      *
      * @var string|null
      */
-    protected ?string $method = Saloon::GET;
+    protected ?string $method = Saloon::POST;
 
     /**
      * @return string
      */
     public function defineEndpoint(): string
     {
-        return '/inventory';
+        return '/notifications';
     }
 
     public function __construct(
-        public array $filters
+        public array $data
     ) {
     }
 
     public function defaultData(): array
     {
-        return $this->filters;
+        return $this->data;
     }
 }

@@ -10,7 +10,7 @@ trait WithOrganizationID
 
     public function bootWithOrganizationID(SaloonRequest $request): void
     {
-        if (!is_null($this->organizationId)) {
+        if (! is_null($this->organizationId)) {
             $request->mergeHeaders([
                 'X-AutozNetwork-Organization-Id' => $this->organizationId,
             ]);

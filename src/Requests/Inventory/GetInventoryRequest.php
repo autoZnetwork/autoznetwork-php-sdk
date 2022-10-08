@@ -3,12 +3,14 @@
 namespace AutozNetwork\Requests\Inventory;
 
 use AutozNetwork\Requests\Request;
+use AutozNetwork\Traits\RequiresOrganizationID;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 
 class GetInventoryRequest extends Request
 {
     use AcceptsJson;
+    use RequiresOrganizationID;
 
     /**
      * Define the method that the request will use.
