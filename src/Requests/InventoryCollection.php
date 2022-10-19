@@ -6,11 +6,20 @@ use AutozNetwork\Requests\Inventory\CreateInventoryImageRequest;
 use AutozNetwork\Requests\Inventory\CreateInventoryRequest;
 use AutozNetwork\Requests\Inventory\DeleteInventoryRequest;
 use AutozNetwork\Requests\Inventory\GetInventoryRequest;
+use AutozNetwork\Requests\Inventory\SearchInventoryRequest;
 use AutozNetwork\Requests\Inventory\UpdateInventoryRequest;
 use Sammyjo20\Saloon\Http\RequestCollection;
 
 class InventoryCollection extends RequestCollection
 {
+    public function search($filters = [])
+    {
+        $request = $this->connector->request(new SearchInventoryRequest($filters));
+        $response = $request->send();
+
+        return $response->json();
+    }
+
     public function all($filters = [])
     {
         $request = $this->connector->request(new CreateInventoryImageRequest($filters));

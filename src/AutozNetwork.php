@@ -16,11 +16,13 @@ use AutozNetwork\Responses\AutozNetworkResponse;
 use Sammyjo20\Saloon\Helpers\OAuth2\OAuthConfig;
 use Sammyjo20\Saloon\Http\SaloonConnector;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
+use Sammyjo20\Saloon\Traits\Plugins\AlwaysThrowsOnErrors;
 
 class AutozNetwork extends SaloonConnector
 {
     use AcceptsJson;
     use WithOrganizationID;
+    use AlwaysThrowsOnErrors;
 
     /**
      * Define the base URL for the API
