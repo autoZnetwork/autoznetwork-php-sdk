@@ -2,6 +2,7 @@
 
 namespace AutozNetwork\Requests\Feeds;
 
+use AutozNetwork\Traits\RequiresOrganizationID;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
@@ -11,6 +12,7 @@ class CreateFeedRequest extends SaloonRequest
 {
     use HasJsonBody;
     use AcceptsJson;
+    use RequiresOrganizationID;
 
     /**
      * Define the method that the request will use.

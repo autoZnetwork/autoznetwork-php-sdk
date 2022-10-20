@@ -7,7 +7,7 @@ use AutozNetwork\Traits\RequiresOrganizationID;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 
-class ListInventoryRequest extends Request
+class SearchInventoryRequest extends Request
 {
     use AcceptsJson;
     use RequiresOrganizationID;
@@ -24,16 +24,21 @@ class ListInventoryRequest extends Request
      */
     public function defineEndpoint(): string
     {
-        return '/inventory';
+        return '/inventory/search';
     }
 
     public function __construct(
-        public array $filters
+        public array $filters,
+        public array $params,
+        public ?string $searchTerm = null
     ) {
     }
 
     public function defaultData(): array
     {
-        return $this->filters;
+        $filters = $this->filters;
+        $filters['query'] = $this->searchTerm;
+
+        return $filters;
     }
 }

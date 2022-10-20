@@ -2,10 +2,6 @@
 
 namespace AutozNetwork;
 
-use AutozNetwork\Requests\InventoryCollection;
-use AutozNetwork\Requests\LocationCollection;
-use AutozNetwork\Requests\OrganizationCollection;
-use AutozNetwork\Responses\AutozNetworkResponse;
 use Sammyjo20\Saloon\Helpers\OAuth2\OAuthConfig;
 use Sammyjo20\Saloon\Http\SaloonConnector;
 use Sammyjo20\Saloon\Traits\OAuth2\AuthorizationCodeGrant;
@@ -29,37 +25,11 @@ class AutozNetworkAuth extends SaloonConnector
 
     private array $scopes = ['*'];
 
-    /**
-     * Custom response that all requests will return.
-     *
-     * @var string|null
-     */
-//    protected ?string $response = AutozNetworkResponse::class;
-
-    /**
-     * The requests/services on the AutozNetwork.
-     *
-     * @var array
-     */
-    protected array $requests = [
-        'organizations' => OrganizationCollection::class,
-        'locations' => LocationCollection::class,
-        'inventory' => InventoryCollection::class,
-    ];
-
-    /**
-     * Define the base URL of the API.
-     *
-     * @return string
-     */
     public function defineBaseUrl(): string
     {
         return $this->apiBaseUrl;
     }
 
-    /**
-     * @param  string|null  $baseUrl
-     */
     public function __construct(
         string $clientId,
         string $clientSecret,
@@ -75,16 +45,6 @@ class AutozNetworkAuth extends SaloonConnector
         if (! is_null($authUrl)) {
             $this->apiBaseUrl = $authUrl;
         }
-    }
-
-    /**
-     * Define any default config.
-     *
-     * @return array
-     */
-    public function defaultConfig(): array
-    {
-        return [];
     }
 
     /**

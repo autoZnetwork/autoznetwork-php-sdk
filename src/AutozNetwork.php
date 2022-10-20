@@ -6,6 +6,7 @@ use AutozNetwork\Plugins\WithOrganizationID;
 use AutozNetwork\Requests\FeedCollection;
 use AutozNetwork\Requests\InventoryCollection;
 use AutozNetwork\Requests\LocationCollection;
+use AutozNetwork\Requests\NotificationCollection;
 use AutozNetwork\Requests\OrganizationCollection;
 use AutozNetwork\Requests\PermissionCollection;
 use AutozNetwork\Requests\RoleCollection;
@@ -15,11 +16,13 @@ use AutozNetwork\Responses\AutozNetworkResponse;
 use Sammyjo20\Saloon\Helpers\OAuth2\OAuthConfig;
 use Sammyjo20\Saloon\Http\SaloonConnector;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
+use Sammyjo20\Saloon\Traits\Plugins\AlwaysThrowsOnErrors;
 
 class AutozNetwork extends SaloonConnector
 {
     use AcceptsJson;
-//    use WithOrganizationID;
+    use WithOrganizationID;
+    use AlwaysThrowsOnErrors;
 
     /**
      * Define the base URL for the API
@@ -57,6 +60,7 @@ class AutozNetwork extends SaloonConnector
         'roles' => RoleCollection::class,
         'permissions' => PermissionCollection::class,
         'users' => UserCollection::class,
+        'notifications' => NotificationCollection::class,
     ];
 
     /**
@@ -109,16 +113,4 @@ class AutozNetwork extends SaloonConnector
             ->setTokenEndpoint('/oauth/token')
             ->setUserEndpoint('/api/user');
     }
-
-//    public function scopes(array $scopes): static
-//    {
-//        $this->scopes = $scopes;
-//
-//        return $this;
-//    }
-//
-//    public function setScopes(array $scopes): static
-//    {
-//        return $this->scopes($scopes);
-//    }
 }
