@@ -29,6 +29,7 @@ class SearchInventoryRequest extends Request
 
     public function __construct(
         public array $filters,
+        public array $params,
         public ?string $searchTerm = null
     ) {
     }

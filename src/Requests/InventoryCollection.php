@@ -8,29 +8,30 @@ use AutozNetwork\Requests\Inventory\DeleteInventoryRequest;
 use AutozNetwork\Requests\Inventory\GetInventoryRequest;
 use AutozNetwork\Requests\Inventory\SearchInventoryRequest;
 use AutozNetwork\Requests\Inventory\UpdateInventoryRequest;
+use AutozNetwork\Requests\Inventory\ListInventoryRequest;
 use Sammyjo20\Saloon\Http\RequestCollection;
 
 class InventoryCollection extends RequestCollection
 {
-    public function search($filters = [])
+    public function search($filters = [], $params = [])
     {
-        $request = $this->connector->request(new SearchInventoryRequest($filters));
+        $request = $this->connector->request(new SearchInventoryRequest($filters, $params));
         $response = $request->send();
 
         return $response->json();
     }
 
-    public function all($filters = [])
+    public function all($filters = [], $params = [])
     {
-        $request = $this->connector->request(new CreateInventoryImageRequest($filters));
+        $request = $this->connector->request(new ListInventoryRequest($filters, $params));
         $response = $request->send();
 
         return $response->json();
     }
 
-    public function get(int $inventoryId)
+    public function get(int $inventoryId, $params = [])
     {
-        $request = $this->connector->request(new GetInventoryRequest($inventoryId));
+        $request = $this->connector->request(new GetInventoryRequest($inventoryId, $params));
         $response = $request->send();
 
         return $response->json();
@@ -60,37 +61,37 @@ class InventoryCollection extends RequestCollection
         return $response->json();
     }
 
-    public function inStock(int $inventorId)
+    public function inStock(int $inventoryId)
     {
-        return $this->update($inventorId, [
+        return $this->update($inventoryId, [
             'status' => 'in-stock',
         ]);
     }
 
-    public function sold(int $inventorId)
+    public function sold(int $inventoryId)
     {
-        return $this->update($inventorId, [
+        return $this->update($inventoryId, [
             'status' => 'sold',
         ]);
     }
 
-    public function deposit(int $inventorId)
+    public function deposit(int $inventoryId)
     {
-        return $this->update($inventorId, [
+        return $this->update($inventoryId, [
             'status' => 'deposit',
         ]);
     }
 
-    public function active(int $inventorId)
+    public function active(int $inventoryId)
     {
-        return $this->update($inventorId, [
+        return $this->update($inventoryId, [
             'active' => true,
         ]);
     }
 
-    public function deactivate(int $inventorId)
+    public function deactivate(int $inventoryId)
     {
-        return $this->update($inventorId, [
+        return $this->update($inventoryId, [
             'active' => false,
         ]);
     }

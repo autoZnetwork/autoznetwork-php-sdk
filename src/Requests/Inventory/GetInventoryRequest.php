@@ -28,7 +28,13 @@ class GetInventoryRequest extends Request
     }
 
     public function __construct(
-        public int $inventoryId
+        public int $inventoryId,
+        public array $params = []
     ) {
+    }
+
+    public function defaultQuery(): array
+    {
+        return $this->params;
     }
 }
