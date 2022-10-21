@@ -5,6 +5,7 @@ namespace AutozNetwork\Requests;
 use AutozNetwork\Requests\Inventory\CreateInventoryImageRequest;
 use AutozNetwork\Requests\Inventory\CreateInventoryRequest;
 use AutozNetwork\Requests\Inventory\DeleteInventoryRequest;
+use AutozNetwork\Requests\Inventory\GetInventoryFacetsRequest;
 use AutozNetwork\Requests\Inventory\GetInventoryRequest;
 use AutozNetwork\Requests\Inventory\SearchInventoryRequest;
 use AutozNetwork\Requests\Inventory\UpdateInventoryRequest;
@@ -16,6 +17,14 @@ class InventoryCollection extends RequestCollection
     public function search($filters = [], $params = [])
     {
         $request = $this->connector->request(new SearchInventoryRequest($filters, $params));
+        $response = $request->send();
+
+        return $response->json();
+    }
+
+    public function facets($params = [])
+    {
+        $request = $this->connector->request(new GetInventoryFacetsRequest($params));
         $response = $request->send();
 
         return $response->json();
