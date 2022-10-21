@@ -2,14 +2,13 @@
 
 namespace AutozNetwork\Requests;
 
-use AutozNetwork\Requests\Inventory\CreateInventoryImageRequest;
 use AutozNetwork\Requests\Inventory\CreateInventoryRequest;
 use AutozNetwork\Requests\Inventory\DeleteInventoryRequest;
 use AutozNetwork\Requests\Inventory\GetInventoryFacetsRequest;
 use AutozNetwork\Requests\Inventory\GetInventoryRequest;
+use AutozNetwork\Requests\Inventory\ListInventoryRequest;
 use AutozNetwork\Requests\Inventory\SearchInventoryRequest;
 use AutozNetwork\Requests\Inventory\UpdateInventoryRequest;
-use AutozNetwork\Requests\Inventory\ListInventoryRequest;
 use Sammyjo20\Saloon\Http\RequestCollection;
 
 class InventoryCollection extends RequestCollection
