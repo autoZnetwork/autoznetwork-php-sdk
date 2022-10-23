@@ -13,9 +13,9 @@ use Sammyjo20\Saloon\Http\RequestCollection;
 
 class InventoryCollection extends RequestCollection
 {
-    public function search($filters = [], $params = [])
+    public function search($params = [], $searchTerm = null)
     {
-        $request = $this->connector->request(new SearchInventoryRequest($filters, $params));
+        $request = $this->connector->request(new SearchInventoryRequest($params, $searchTerm));
         $response = $request->send();
 
         return $response->json();
@@ -29,9 +29,9 @@ class InventoryCollection extends RequestCollection
         return $response->json();
     }
 
-    public function all($filters = [], $params = [])
+    public function all($params = [])
     {
-        $request = $this->connector->request(new ListInventoryRequest($filters, $params));
+        $request = $this->connector->request(new ListInventoryRequest($params));
         $response = $request->send();
 
         return $response->json();
