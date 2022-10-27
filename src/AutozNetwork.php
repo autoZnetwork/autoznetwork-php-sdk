@@ -29,7 +29,7 @@ class AutozNetwork extends SaloonConnector
      *
      * @var string
      */
-    protected string $apiBaseUrl = 'https://api.autoznetwork.com';
+    protected string $apiBaseUrl = 'https://autoznetwork.com/api';
 
     private string $clientId;
 
