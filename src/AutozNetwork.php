@@ -3,6 +3,7 @@
 namespace AutozNetwork;
 
 use AutozNetwork\Plugins\WithOrganizationID;
+use AutozNetwork\Requests\BodyStyleCollection;
 use AutozNetwork\Requests\FeedCollection;
 use AutozNetwork\Requests\InventoryCollection;
 use AutozNetwork\Requests\LocationCollection;
@@ -61,6 +62,7 @@ class AutozNetwork extends SaloonConnector
         'permissions' => PermissionCollection::class,
         'users' => UserCollection::class,
         'notifications' => NotificationCollection::class,
+        'bodyStyles' => BodyStyleCollection::class,
     ];
 
     /**
