@@ -28,12 +28,12 @@ class ListInventoryRequest extends Request
     }
 
     public function __construct(
-        public array $filters
+        public array $params
     ) {
     }
 
-    public function defaultData(): array
+    public function defaultQuery(): array
     {
-        return $this->filters;
+        return $this->params;
     }
 }

@@ -30,14 +30,11 @@ class SearchInventoryRequest extends Request
     public function __construct(
         public array $params,
         public ?string $searchTerm = null
-    ) {
-    }
+    ) {}
 
     public function defaultQuery(): array
     {
-        $params = $this->params;
-        $params['query'] = $this->searchTerm;
-
-        return $params;
+        $this->params['query'] = $this->searchTerm;
+        return $this->params;
     }
 }
