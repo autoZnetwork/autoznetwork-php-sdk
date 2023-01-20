@@ -29,12 +29,17 @@ class GetInventoryRequest extends Request
 
     public function __construct(
         public int $inventoryId,
-        public array $params = []
+        public array $params = [],
+        public bool $cache = true,
     ) {
     }
 
     public function defaultQuery(): array
     {
+        if (! $this->cache) {
+            $this->params['no-cache'] = $this->cache;
+        }
+
         return $this->params;
     }
 }

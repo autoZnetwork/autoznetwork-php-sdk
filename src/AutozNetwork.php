@@ -13,23 +13,29 @@ use AutozNetwork\Requests\PermissionCollection;
 use AutozNetwork\Requests\RoleCollection;
 use AutozNetwork\Requests\SyndicationCollection;
 use AutozNetwork\Requests\UserCollection;
-use AutozNetwork\Responses\AutozNetworkResponse;
 use Sammyjo20\Saloon\Helpers\OAuth2\OAuthConfig;
 use Sammyjo20\Saloon\Http\SaloonConnector;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 use Sammyjo20\Saloon\Traits\Plugins\AlwaysThrowsOnErrors;
 
+/**
+ * @method OrganizationCollection organizations
+ * @method LocationCollection locations
+ * @method InventoryCollection inventory
+ * @method SyndicationCollection syndications
+ * @method FeedCollection feeds
+ * @method RoleCollection roles
+ * @method PermissionCollection permissions
+ * @method UserCollection users
+ * @method NotificationCollection notifications
+ * @method BodyStyleCollection bodyStyles
+ */
 class AutozNetwork extends SaloonConnector
 {
     use AcceptsJson;
     use WithOrganizationID;
     use AlwaysThrowsOnErrors;
 
-    /**
-     * Define the base URL for the API
-     *
-     * @var string
-     */
     protected string $apiBaseUrl = 'https://autoznetwork.com/api';
 
     private string $clientId;
@@ -39,13 +45,6 @@ class AutozNetwork extends SaloonConnector
     private string $redirectUrl;
 
     private array $scopes = ['*'];
-
-    /**
-     * Custom response that all requests will return.
-     *
-     * @var string|null
-     */
-//    protected ?string $response = AutozNetworkResponse::class;
 
     /**
      * The requests/services on the AutozNetwork.
@@ -65,6 +64,14 @@ class AutozNetwork extends SaloonConnector
         'bodyStyles' => BodyStyleCollection::class,
     ];
 
+    public function __construct($authenticator, string $apiUrl = null) {
+        $this->authenticator = $authenticator;
+
+        if (! is_null($apiUrl)) {
+            $this->apiBaseUrl = $apiUrl;
+        }
+    }
+
     /**
      * Define the base URL of the API.
      *
@@ -73,20 +80,6 @@ class AutozNetwork extends SaloonConnector
     public function defineBaseUrl(): string
     {
         return $this->apiBaseUrl;
-    }
-
-    /**
-     * @param  string|null  $baseUrl
-     */
-    public function __construct(
-        $authenticator,
-        string $apiUrl = null
-    ) {
-        $this->authenticator = $authenticator;
-
-        if (! is_null($apiUrl)) {
-            $this->apiBaseUrl = $apiUrl;
-        }
     }
 
     /**

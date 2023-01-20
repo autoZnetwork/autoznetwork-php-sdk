@@ -9,64 +9,65 @@ use AutozNetwork\Requests\Inventory\GetInventoryRequest;
 use AutozNetwork\Requests\Inventory\ListInventoryRequest;
 use AutozNetwork\Requests\Inventory\SearchInventoryRequest;
 use AutozNetwork\Requests\Inventory\UpdateInventoryRequest;
-use Sammyjo20\Saloon\Http\RequestCollection;
 
-class InventoryCollection extends RequestCollection
+class InventoryCollection extends BaseCollection
 {
+    protected bool $cache = true;
+
+    public function withoutCache(): self
+    {
+        $this->cache = false;
+
+        return $this;
+    }
+
     public function search($params = [], $searchTerm = null)
     {
-        $request = $this->connector->request(new SearchInventoryRequest($params, $searchTerm));
-        $response = $request->send();
-
-        return $response->json();
+        return $this->send(
+            $this->connector->request(new SearchInventoryRequest($params, $searchTerm))
+        );
     }
 
     public function facets($params = [])
     {
-        $request = $this->connector->request(new GetInventoryFacetsRequest($params));
-        $response = $request->send();
-
-        return $response->json();
+        return $this->send(
+            $this->connector->request(new GetInventoryFacetsRequest($params))
+        );
     }
 
     public function all($params = [])
     {
-        $request = $this->connector->request(new ListInventoryRequest($params));
-        $response = $request->send();
-
-        return $response->json();
+        return $this->send(
+            $this->connector->request(new ListInventoryRequest($params))
+        );
     }
 
     public function get(int $inventoryId, $params = [])
     {
-        $request = $this->connector->request(new GetInventoryRequest($inventoryId, $params));
-        $response = $request->send();
-
-        return $response->json();
+        return $this->send(
+            $this->connector->request(new GetInventoryRequest($inventoryId, $params, $this->cache))
+        );
     }
 
     public function create(array $data)
     {
-        $request = $this->connector->request(new CreateInventoryRequest($data));
-        $response = $request->send();
-
-        return $response->json();
+        return $this->send(
+            $this->connector->request(new CreateInventoryRequest($data))
+        );
     }
 
     public function update(int $inventoryId, array $data)
     {
-        $request = $this->connector->request(new UpdateInventoryRequest($inventoryId, $data));
-        $response = $request->send();
-
-        return $response->json();
+        return $this->send(
+            $this->connector->request(new UpdateInventoryRequest($inventoryId, $data))
+        );
     }
 
     public function delete(int $inventoryId)
     {
-        $request = $this->connector->request(new DeleteInventoryRequest($inventoryId));
-        $response = $request->send();
-
-        return $response->json();
+        return $this->send(
+            $this->connector->request(new DeleteInventoryRequest($inventoryId))
+        );
     }
 
     public function inStock(int $inventoryId)
