@@ -28,12 +28,22 @@ class ListInventoryRequest extends Request
     }
 
     public function __construct(
-        public array $params
+        public array $params,
+        public ?string $sort = null,
+        public ?string $direction = null,
     ) {
     }
 
     public function defaultQuery(): array
     {
+        if ($this->sort) {
+            $this->params['sort'] = $this->sort;
+
+            if ($this->direction) {
+                $this->params['sort_direction'] = $this->direction;
+            }
+        }
+
         return $this->params;
     }
 }

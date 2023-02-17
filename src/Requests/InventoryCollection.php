@@ -14,6 +14,10 @@ class InventoryCollection extends BaseCollection
 {
     protected bool $cache = true;
 
+    protected ?string $sort = null;
+
+    protected ?string $direction = null;
+
     public function withoutCache(): self
     {
         $this->cache = false;
@@ -24,7 +28,7 @@ class InventoryCollection extends BaseCollection
     public function search($params = [], $searchTerm = null)
     {
         return $this->send(
-            $this->connector->request(new SearchInventoryRequest($params, $searchTerm))
+            $this->connector->request(new SearchInventoryRequest($params, $searchTerm, $this->sort, $this->direction))
         );
     }
 
@@ -38,7 +42,7 @@ class InventoryCollection extends BaseCollection
     public function all($params = [])
     {
         return $this->send(
-            $this->connector->request(new ListInventoryRequest($params))
+            $this->connector->request(new ListInventoryRequest($params, $this->sort, $this->direction))
         );
     }
 
@@ -68,6 +72,14 @@ class InventoryCollection extends BaseCollection
         return $this->send(
             $this->connector->request(new DeleteInventoryRequest($inventoryId))
         );
+    }
+
+    public function orderBy(string $sort, $direction = null): self
+    {
+        $this->sort = $sort;
+        $this->direction = $direction;
+
+        return $this;
     }
 
     public function inStock(int $inventoryId)
