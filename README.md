@@ -1,5 +1,7 @@
 # autoZnetwork PHP SDK
 
+For example usage visit [https://docs.autoznetwork.com](https://docs.autoznetwork.com)
+
 ## Environment Variables
 
 ```php
@@ -11,4 +13,16 @@ AUTOZNETWORK_REDIRECT_URL="https://yourdomain.com/autoznetwork/callback" // Requ
 AUTOZNETWORK_AUTH_URL="https://autoznetwork.com" // Not Required - for Oauth
 
 AUTOZNETWORK_API_URL= // Not Required
+```
+
+## Basic API Token Usage
+
+```php
+$autoZnetwork = new AutozNetwork('API TOKEN');
+$organizationId = '12345';
+
+$inventory = $autoZnetwork
+                ->withOrganization($organizationId)
+                ->inventory()
+                ->all();
 ```
