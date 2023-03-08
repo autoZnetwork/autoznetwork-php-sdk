@@ -32,7 +32,8 @@ class SearchInventoryRequest extends Request
         public ?string $searchTerm = null,
         public ?string $sort = null,
         public ?string $direction = null,
-    ) {}
+    ) {
+    }
 
     public function defaultQuery(): array
     {
