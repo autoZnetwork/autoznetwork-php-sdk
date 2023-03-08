@@ -64,7 +64,8 @@ class AutozNetwork extends SaloonConnector
         'bodyStyles' => BodyStyleCollection::class,
     ];
 
-    public function __construct($authenticator, string $apiUrl = null) {
+    public function __construct($authenticator, string $apiUrl = null)
+    {
         $this->authenticator = $authenticator;
 
         if (! is_null($apiUrl)) {
