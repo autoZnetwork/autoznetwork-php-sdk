@@ -22,9 +22,9 @@
         "sammyjo20/saloon": "^2.0"
     },
     "require-dev": {
-        "pestphp/pest": "^1.21",
         "spatie/ray": "^1.33",
-        "laravel/pint": "^1.0.0"
+        "pestphp/pest": "^2.6",
+        "laravel/pint": "^1.10"
     },
     "scripts": {
         "test": [
