@@ -1,0 +1,20 @@
+<?php
+
+namespace AutozNetwork\Resources;
+
+use AutozNetwork\Requests\Organizations\GetOrganizationRequest;
+use AutozNetwork\Requests\Organizations\ListOrganizationsRequest;
+use Saloon\Http\Response;
+
+class OrganizationResource extends BaseResource
+{
+    public function all(): Response
+    {
+        return $this->connector->send(new ListOrganizationsRequest())->json();
+    }
+
+    public function get(int $id): Response
+    {
+        return $this->connector->send(new GetOrganizationRequest($id))->json();
+    }
+}

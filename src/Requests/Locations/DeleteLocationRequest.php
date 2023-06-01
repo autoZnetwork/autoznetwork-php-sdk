@@ -2,11 +2,11 @@
 
 namespace AutozNetwork\Requests\Locations;
 
-use AutozNetwork\Requests\Request;
 use AutozNetwork\Traits\RequiresOrganizationID;
-use Sammyjo20\Saloon\Constants\Saloon;
-use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
-use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Traits\Body\HasJsonBody;
+use Saloon\Traits\Plugins\AcceptsJson;
 
 class DeleteLocationRequest extends Request
 {
@@ -14,23 +14,14 @@ class DeleteLocationRequest extends Request
     use AcceptsJson;
     use RequiresOrganizationID;
 
-    /**
-     * Define the method that the request will use.
-     *
-     * @var string|null
-     */
-    protected ?string $method = Saloon::DELETE;
+    protected Method $method = Method::DELETE;
 
-    /**
-     * @return string
-     */
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
-        return '/locations/'.$this->locationId;
+        return "/locations/$this->locationId";
     }
 
-    public function __construct(
-        public int $locationId
-    ) {
+    public function __construct(public int $locationId)
+    {
     }
 }

@@ -3,38 +3,29 @@
 namespace AutozNetwork\Requests\Notifications;
 
 use AutozNetwork\Traits\RequiresOrganizationID;
-use Sammyjo20\Saloon\Constants\Saloon;
-use Sammyjo20\Saloon\Http\SaloonRequest;
-use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
-use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Traits\Body\HasJsonBody;
+use Saloon\Traits\Plugins\AcceptsJson;
 
-class CreateNotificationRequest extends SaloonRequest
+class CreateNotificationRequest extends Request
 {
     use HasJsonBody;
     use AcceptsJson;
     use RequiresOrganizationID;
 
-    /**
-     * Define the method that the request will use.
-     *
-     * @var string|null
-     */
-    protected ?string $method = Saloon::POST;
+    protected Method $method = Method::POST;
 
-    /**
-     * @return string
-     */
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
         return '/notifications';
     }
 
-    public function __construct(
-        public array $data
-    ) {
+    public function __construct(public array $data)
+    {
     }
 
-    public function defaultData(): array
+    public function defaultBody(): array
     {
         return $this->data;
     }

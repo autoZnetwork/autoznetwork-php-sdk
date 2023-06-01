@@ -2,41 +2,32 @@
 
 namespace AutozNetwork\Requests\Inventory;
 
-use AutozNetwork\Requests\Request;
 use AutozNetwork\Traits\RequiresOrganizationID;
-use Sammyjo20\Saloon\Constants\Saloon;
-use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Traits\Plugins\AcceptsJson;
 
 class CreateInventoryImageRequest extends Request
 {
     use AcceptsJson;
     use RequiresOrganizationID;
 
-    private bool $removeBackground = false;
+    protected bool $removeBackground = false;
 
-    private ?string $removeBackgroundWebhookUrl;
+    protected ?string $removeBackgroundWebhookUrl;
 
-    /**
-     * Define the method that the request will use.
-     *
-     * @var string|null
-     */
-    protected ?string $method = Saloon::POST;
+    protected Method $method = Method::POST;
 
-    /**
-     * @return string
-     */
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
         return '/inventory';
     }
 
-    public function __construct(
-        public array $filters
-    ) {
+    public function __construct(public array $filters)
+    {
     }
 
-    public function defaultData(): array
+    public function defaultBody(): array
     {
         return $this->filters;
     }

@@ -2,31 +2,22 @@
 
 namespace AutozNetwork\Requests\Roles;
 
-use AutozNetwork\Requests\Request;
-use Sammyjo20\Saloon\Constants\Saloon;
-use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Traits\Plugins\AcceptsJson;
 
 class GetRoleRequest extends Request
 {
     use AcceptsJson;
 
-    /**
-     * Define the method that the request will use.
-     *
-     * @var string|null
-     */
-    protected ?string $method = Saloon::GET;
+    protected Method $method = Method::GET;
 
-    /**
-     * @return string
-     */
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
-        return '/roles/'.$this->roleId;
+        return "/roles/$this->roleId";
     }
 
-    public function __construct(
-        public int $roleId
-    ) {
+    public function __construct(public int $roleId)
+    {
     }
 }

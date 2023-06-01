@@ -2,34 +2,26 @@
 
 namespace AutozNetwork\Requests\Roles;
 
-use AutozNetwork\Requests\Request;
-use Sammyjo20\Saloon\Constants\Saloon;
-use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
-use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Traits\Body\HasJsonBody;
+use Saloon\Traits\Plugins\AcceptsJson;
 
 class AddPermissionToRoleRequest extends Request
 {
     use HasJsonBody;
     use AcceptsJson;
 
-    /**
-     * Define the method that the request will use.
-     *
-     * @var string|null
-     */
-    protected ?string $method = Saloon::POST;
+    protected Method $method = Method::POST;
 
-    /**
-     * @return string
-     */
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
-        return '/roles/'.$this->roleId.'/permissions/'.$this->permissionId;
+        return "/roles/$this->roleId/permissions/$this->permissionId";
     }
 
     public function __construct(
         public int $roleId,
-        public int $permissionId
+        public int $permissionId,
     ) {
     }
 }

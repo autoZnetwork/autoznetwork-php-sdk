@@ -2,11 +2,11 @@
 
 namespace AutozNetwork\Requests\Users;
 
-use AutozNetwork\Requests\Request;
 use AutozNetwork\Traits\RequiresOrganizationID;
-use Sammyjo20\Saloon\Constants\Saloon;
-use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
-use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Traits\Body\HasJsonBody;
+use Saloon\Traits\Plugins\AcceptsJson;
 
 class DeleteUserRequest extends Request
 {
@@ -14,23 +14,14 @@ class DeleteUserRequest extends Request
     use AcceptsJson;
     use RequiresOrganizationID;
 
-    /**
-     * Define the method that the request will use.
-     *
-     * @var string|null
-     */
-    protected ?string $method = Saloon::DELETE;
+    protected Method $method = Method::DELETE;
 
-    /**
-     * @return string
-     */
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
-        return '/users/'.$this->userId;
+        return "/users/$this->userId";
     }
 
-    public function __construct(
-        public int $userId
-    ) {
+    public function __construct(public int $userId)
+    {
     }
 }
