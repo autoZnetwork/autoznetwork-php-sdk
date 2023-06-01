@@ -6,16 +6,15 @@ use AutozNetwork\Requests\Locations\CreateLocationRequest;
 use AutozNetwork\Requests\Locations\DeleteLocationRequest;
 use AutozNetwork\Requests\Locations\GetLocationRequest;
 use AutozNetwork\Requests\Locations\ListLocationsRequest;
-use Saloon\Http\Response;
 
 class LocationResource extends BaseResource
 {
-    public function all(): Response
+    public function all(): mixed
     {
         return $this->connector->send(new ListLocationsRequest())->json();
     }
 
-    public function get(string|int $id): Response
+    public function get(string|int $id): mixed
     {
         $id = is_numeric($id)
             ? $id
@@ -24,12 +23,12 @@ class LocationResource extends BaseResource
         return $this->connector->send(new GetLocationRequest($id))->json();
     }
 
-    public function create(array $data): Response
+    public function create(array $data): mixed
     {
         return $this->connector->send(new CreateLocationRequest($data))->json();
     }
 
-    public function delete(int $id): Response
+    public function delete(int $id): mixed
     {
         return $this->connector->send(new DeleteLocationRequest($id))->json();
     }
