@@ -2,11 +2,11 @@
 
 namespace AutozNetwork\Requests\Inventory;
 
-use AutozNetwork\Requests\Request;
 use AutozNetwork\Traits\RequiresOrganizationID;
-use Sammyjo20\Saloon\Constants\Saloon;
-use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
-use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Traits\Body\HasJsonBody;
+use Saloon\Traits\Plugins\AcceptsJson;
 
 class UpdateInventoryRequest extends Request
 {
@@ -14,28 +14,20 @@ class UpdateInventoryRequest extends Request
     use AcceptsJson;
     use RequiresOrganizationID;
 
-    /**
-     * Define the method that the request will use.
-     *
-     * @var string|null
-     */
-    protected ?string $method = Saloon::PUT;
+    protected Method $method = Method::PUT;
 
-    /**
-     * @return string
-     */
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
-        return '/inventory/'.$this->inventoryId;
+        return "/inventory/$this->inventoryId";
     }
 
     public function __construct(
         public int $inventoryId,
-        public array $data
+        public array $data,
     ) {
     }
 
-    public function defaultData(): array
+    public function defaultBody(): array
     {
         return $this->data;
     }

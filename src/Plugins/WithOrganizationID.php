@@ -2,16 +2,16 @@
 
 namespace AutozNetwork\Plugins;
 
-use Sammyjo20\Saloon\Http\SaloonRequest;
+use Saloon\Http\PendingRequest;
 
 trait WithOrganizationID
 {
     public ?int $organizationId = null;
 
-    public function bootWithOrganizationID(SaloonRequest $request): void
+    public function bootWithOrganizationID(PendingRequest $pendingRequest): void
     {
         if (! is_null($this->organizationId)) {
-            $request->mergeHeaders([
+            $pendingRequest->headers()->merge([
                 'X-AutozNetwork-Organization-Id' => $this->organizationId,
             ]);
         }

@@ -2,18 +2,8 @@
 
 namespace AutozNetwork\Exceptions;
 
-use Sammyjo20\Saloon\Exceptions\SaloonRequestException;
-use Sammyjo20\Saloon\Http\SaloonResponse;
+use Saloon\Exceptions\SaloonException;
 
-class AutozNetworkRequestException extends SaloonRequestException
+class AutozNetworkRequestException extends SaloonException
 {
-    /**
-     * Retrieve the response.
-     *
-     * @return SaloonResponse
-     */
-    public function getResponse(): SaloonResponse
-    {
-        return $this->getSaloonResponse();
-    }
 }

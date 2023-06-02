@@ -2,19 +2,14 @@
 
 namespace AutozNetwork;
 
-use Sammyjo20\Saloon\Helpers\OAuth2\OAuthConfig;
-use Sammyjo20\Saloon\Http\SaloonConnector;
-use Sammyjo20\Saloon\Traits\OAuth2\AuthorizationCodeGrant;
+use Saloon\Helpers\OAuth2\OAuthConfig;
+use Saloon\Http\Connector;
+use Saloon\Traits\OAuth2\AuthorizationCodeGrant;
 
-class AutozNetworkAuth extends SaloonConnector
+class AutozNetworkAuth extends Connector
 {
     use AuthorizationCodeGrant;
 
-    /**
-     * Define the base URL for the API
-     *
-     * @var string
-     */
     protected string $apiBaseUrl = 'https://autoznetwork.com';
 
     private string $clientId;
@@ -25,7 +20,7 @@ class AutozNetworkAuth extends SaloonConnector
 
     private array $scopes = ['*'];
 
-    public function defineBaseUrl(): string
+    public function resolveBaseUrl(): string
     {
         return $this->apiBaseUrl;
     }
@@ -34,7 +29,7 @@ class AutozNetworkAuth extends SaloonConnector
         string $clientId,
         string $clientSecret,
         string $redirectUrl,
-        string $authUrl = null
+        string $authUrl = null,
     ) {
         $this->clientId = $clientId;
 
@@ -47,11 +42,6 @@ class AutozNetworkAuth extends SaloonConnector
         }
     }
 
-    /**
-     * Define the default OAuth2 Config.
-     *
-     * @return OAuthConfig
-     */
     protected function defaultOauthConfig(): OAuthConfig
     {
         return OAuthConfig::make()
