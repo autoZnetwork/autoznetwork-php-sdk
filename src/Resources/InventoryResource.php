@@ -32,19 +32,7 @@ class InventoryResource extends BaseResource
         )->json();
     }
 
-    public function search($params = [], $searchTerm = null): mixed
-    {
-        return $this->connector->send(
-            new SearchInventoryRequest($params, $searchTerm, $this->sort, $this->direction)
-        )->json();
-    }
-
-    public function facets($params = []): mixed
-    {
-        return $this->connector->send(new GetInventoryFacetsRequest($params))->json();
-    }
-
-    public function get(int $id, array $params): mixed
+    public function get(int $id, array $params = []): mixed
     {
         return $this->connector->send(new GetInventoryRequest($id, $params, $this->cache))->json();
     }
@@ -62,6 +50,18 @@ class InventoryResource extends BaseResource
     public function delete(int $id): mixed
     {
         return $this->connector->send(new DeleteInventoryRequest($id))->json();
+    }
+
+    public function search($params = [], $searchTerm = null): mixed
+    {
+        return $this->connector->send(
+            new SearchInventoryRequest($params, $searchTerm, $this->sort, $this->direction)
+        )->json();
+    }
+
+    public function facets($params = []): mixed
+    {
+        return $this->connector->send(new GetInventoryFacetsRequest($params))->json();
     }
 
     public function orderBy(string|null $sort, $direction = null): self
