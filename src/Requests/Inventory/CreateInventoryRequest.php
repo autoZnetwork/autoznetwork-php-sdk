@@ -3,26 +3,25 @@
 namespace AutozNetwork\Requests\Inventory;
 
 use AutozNetwork\Traits\RequiresOrganizationID;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
-use Saloon\Traits\Plugins\AcceptsJson;
 
-class CreateInventoryRequest extends Request
+class CreateInventoryRequest extends Request implements HasBody
 {
     use HasJsonBody;
-    use AcceptsJson;
     use RequiresOrganizationID;
 
     protected Method $method = Method::POST;
 
+    public function __construct(public array $data)
+    {
+    }
+
     public function resolveEndpoint(): string
     {
         return '/inventory';
-    }
-
-    public function __construct(public array $data)
-    {
     }
 
     public function defaultBody(): array

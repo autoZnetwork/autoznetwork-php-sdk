@@ -3,28 +3,27 @@
 namespace AutozNetwork\Requests\Inventory;
 
 use AutozNetwork\Traits\RequiresOrganizationID;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
-use Saloon\Traits\Plugins\AcceptsJson;
 
-class UpdateInventoryRequest extends Request
+class UpdateInventoryRequest extends Request implements HasBody
 {
     use HasJsonBody;
-    use AcceptsJson;
     use RequiresOrganizationID;
 
     protected Method $method = Method::PUT;
 
-    public function resolveEndpoint(): string
-    {
-        return "/inventory/$this->inventoryId";
-    }
-
     public function __construct(
-        public int $inventoryId,
+        public int $id,
         public array $data,
     ) {
+    }
+
+    public function resolveEndpoint(): string
+    {
+        return "/inventory/$this->id";
     }
 
     public function defaultBody(): array

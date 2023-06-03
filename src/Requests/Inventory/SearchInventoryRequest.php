@@ -5,19 +5,12 @@ namespace AutozNetwork\Requests\Inventory;
 use AutozNetwork\Traits\RequiresOrganizationID;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Saloon\Traits\Plugins\AcceptsJson;
 
 class SearchInventoryRequest extends Request
 {
-    use AcceptsJson;
     use RequiresOrganizationID;
 
     protected Method $method = Method::GET;
-
-    public function resolveEndpoint(): string
-    {
-        return '/inventory/search';
-    }
 
     public function __construct(
         public array $params,
@@ -25,6 +18,11 @@ class SearchInventoryRequest extends Request
         public ?string $sort = null,
         public ?string $direction = null,
     ) {
+    }
+
+    public function resolveEndpoint(): string
+    {
+        return '/inventory/search';
     }
 
     public function defaultQuery(): array

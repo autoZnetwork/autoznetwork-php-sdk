@@ -48,11 +48,6 @@ class AutozNetwork extends Connector
         return $this->apiBaseUrl;
     }
 
-    public function defaultConfig(): array
-    {
-        return [];
-    }
-
     protected function defaultOauthConfig(): OAuthConfig
     {
         return OAuthConfig::make()

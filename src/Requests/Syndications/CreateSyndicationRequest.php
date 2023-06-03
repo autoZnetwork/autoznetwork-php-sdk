@@ -3,26 +3,25 @@
 namespace AutozNetwork\Requests\Syndications;
 
 use AutozNetwork\Traits\RequiresOrganizationID;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
-use Saloon\Traits\Plugins\AcceptsJson;
 
-class CreateSyndicationRequest extends Request
+class CreateSyndicationRequest extends Request implements HasBody
 {
     use HasJsonBody;
-    use AcceptsJson;
     use RequiresOrganizationID;
 
     protected Method $method = Method::POST;
 
+    public function __construct(public array $data)
+    {
+    }
+
     public function resolveEndpoint(): string
     {
         return '/syndications';
-    }
-
-    public function __construct(public array $data)
-    {
     }
 
     public function defaultBody(): array

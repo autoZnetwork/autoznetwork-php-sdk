@@ -14,10 +14,6 @@ class InventoryResource extends BaseResource
 {
     protected bool $cache = true;
 
-    protected ?string $sort = null;
-
-    protected ?string $direction = null;
-
     public function withoutCache(): self
     {
         $this->cache = false;
@@ -62,14 +58,6 @@ class InventoryResource extends BaseResource
     public function facets($params = []): mixed
     {
         return $this->connector->send(new GetInventoryFacetsRequest($params))->json();
-    }
-
-    public function orderBy(string|null $sort, $direction = null): self
-    {
-        $this->sort = $sort;
-        $this->direction = $direction;
-
-        return $this;
     }
 
     public function inStock(int $id): mixed

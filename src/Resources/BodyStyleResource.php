@@ -9,7 +9,10 @@ class BodyStyleResource extends BaseResource
 {
     public function all(): mixed
     {
-        return $this->connector->send(new ListBodyStylesRequest())->json();
+        return $this->connector->send(new ListBodyStylesRequest(
+            sort: $this->sort,
+            direction: $this->direction,
+        ))->json();
     }
 
     public function get(int $id): mixed
