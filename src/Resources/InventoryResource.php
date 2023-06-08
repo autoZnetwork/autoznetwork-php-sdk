@@ -14,6 +14,10 @@ class InventoryResource extends BaseResource
 {
     protected bool $cache = true;
 
+    protected array $filter = [];
+
+    protected array $exclude = [];
+
     public function withoutCache(): self
     {
         $this->cache = false;
@@ -21,8 +25,30 @@ class InventoryResource extends BaseResource
         return $this;
     }
 
+    public function filter(array $data): self
+    {
+        $this->filter = $data;
+
+        return $this;
+    }
+
+    public function exclude(array $data): self
+    {
+        $this->exclude = $data;
+
+        return $this;
+    }
+
     public function all($params = []): mixed
     {
+        if (count($this->filter) > 0) {
+            $params['filter'] = $this->filter;
+        }
+
+        if (count($this->exclude) > 0) {
+            $params['exclude'] = $this->exclude;
+        }
+
         return $this->connector->send(
             new ListInventoryRequest($params, $this->sort, $this->direction)
         )->json();
