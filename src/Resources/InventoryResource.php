@@ -66,10 +66,10 @@ class InventoryResource extends BaseResource
             'stock' => $stock,
             'vin' => $vin,
             'active' => '1,0',
-            'is_sold' => '1,0',
         ];
 
         $query = $this->all([
+            'sold_at' => '1,0',
             'limit' => 1,
         ]);
 
