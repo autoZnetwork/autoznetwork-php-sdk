@@ -65,7 +65,6 @@ class InventoryResource extends BaseResource
         $this->filter = [
             'stock' => $stock,
             'vin' => $vin,
-            'active' => '1,0',
         ];
 
         $query = $this->all([
