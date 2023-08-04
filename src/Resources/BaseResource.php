@@ -14,7 +14,7 @@ abstract class BaseResource
     {
     }
 
-    public function orderBy(string|null $sort, $direction = null): self
+    public function orderBy(?string $sort, $direction = null): self
     {
         $this->sort = $sort;
         $this->direction = $direction;

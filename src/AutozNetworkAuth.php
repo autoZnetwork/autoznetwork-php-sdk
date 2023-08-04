@@ -54,15 +54,15 @@ class AutozNetworkAuth extends Connector
             ->setUserEndpoint('/api/user');
     }
 
-//    public function scopes(array $scopes): static
-//    {
-//        $this->scopes = $scopes;
-//
-//        return $this;
-//    }
-//
-//    public function setScopes(array $scopes): static
-//    {
-//        return $this->scopes($scopes);
-//    }
+    //    public function scopes(array $scopes): static
+    //    {
+    //        $this->scopes = $scopes;
+    //
+    //        return $this;
+    //    }
+    //
+    //    public function setScopes(array $scopes): static
+    //    {
+    //        return $this->scopes($scopes);
+    //    }
 }

@@ -88,7 +88,7 @@ class InventoryResource extends BaseResource
         return $this->connector->send(new DeleteInventoryRequest($id))->json();
     }
 
-    public function search(array $params = [], ?string $searchTerm = null): mixed
+    public function search(array $params = [], string $searchTerm = null): mixed
     {
         return $this->connector->send(
             new SearchInventoryRequest($params, $searchTerm, $this->sort, $this->direction)
