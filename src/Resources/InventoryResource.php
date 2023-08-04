@@ -2,6 +2,7 @@
 
 namespace AutozNetwork\Resources;
 
+use AutozNetwork\Requests\Inventory\AuditInventoryRequest;
 use AutozNetwork\Requests\Inventory\CreateInventoryRequest;
 use AutozNetwork\Requests\Inventory\DeleteInventoryRequest;
 use AutozNetwork\Requests\Inventory\GetInventoryFacetsRequest;
@@ -39,7 +40,7 @@ class InventoryResource extends BaseResource
         return $this;
     }
 
-    public function all($params = []): mixed
+    public function all(array $params = []): mixed
     {
         if (count($this->filter) > 0) {
             $params['filter'] = $this->filter;
@@ -59,6 +60,19 @@ class InventoryResource extends BaseResource
         return $this->connector->send(new GetInventoryRequest($id, $params, $this->cache))->json();
     }
 
+    public function getByStockAndVin(string $stock, string $vin): mixed
+    {
+        $query = $this->all([
+            'stock' => $stock,
+            'vin' => $vin,
+            'active' => 'true,false',
+            'is_sold' => 'true,false',
+            'limit' => 1,
+        ]);
+
+        return $query['data'][0] ?? null;
+    }
+
     public function create(array $data): mixed
     {
         return $this->connector->send(new CreateInventoryRequest($data))->json();
@@ -74,11 +88,16 @@ class InventoryResource extends BaseResource
         return $this->connector->send(new DeleteInventoryRequest($id))->json();
     }
 
-    public function search($params = [], $searchTerm = null): mixed
+    public function search(array $params = [], ?string $searchTerm = null): mixed
     {
         return $this->connector->send(
             new SearchInventoryRequest($params, $searchTerm, $this->sort, $this->direction)
         )->json();
+    }
+
+    public function audit(array $vehicles): mixed
+    {
+        return $this->connector->send(new AuditInventoryRequest($vehicles))->json();
     }
 
     public function facets($params = []): mixed
