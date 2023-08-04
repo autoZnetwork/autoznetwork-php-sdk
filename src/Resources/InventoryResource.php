@@ -62,11 +62,14 @@ class InventoryResource extends BaseResource
 
     public function getByStockAndVin(string $stock, string $vin): mixed
     {
-        $query = $this->search([
+        $this->filter = [
             'stock' => $stock,
             'vin' => $vin,
-            'active' => 'true,false',
-            'is_sold' => 'true,false',
+            'active' => '1,0',
+            'is_sold' => '1,0',
+        ];
+
+        $query = $this->all([
             'limit' => 1,
         ]);
 
