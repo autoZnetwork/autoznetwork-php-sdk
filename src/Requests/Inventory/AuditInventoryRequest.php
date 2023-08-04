@@ -3,11 +3,12 @@
 namespace AutozNetwork\Requests\Inventory;
 
 use AutozNetwork\Traits\RequiresOrganizationID;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
-class AuditInventoryRequest extends Request
+class AuditInventoryRequest extends Request implements HasBody
 {
     use HasJsonBody;
     use RequiresOrganizationID;
