@@ -12,8 +12,8 @@ class OrganizationResource extends BaseResource
         return $this->connector->send(new ListOrganizationsRequest())->json();
     }
 
-    public function get(int $id): mixed
+    public function get(int $id, array $params = []): mixed
     {
-        return $this->connector->send(new GetOrganizationRequest($id))->json();
+        return $this->connector->send(new GetOrganizationRequest($id, $params))->json();
     }
 }
