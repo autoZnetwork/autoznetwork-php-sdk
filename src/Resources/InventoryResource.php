@@ -60,15 +60,61 @@ class InventoryResource extends BaseResource
         return $this->connector->send(new GetInventoryRequest($id, $params, $this->cache))->json();
     }
 
-    public function getByStockAndVin(string $stock, string $vin): mixed
+    public function getByStock(string $stock, bool $online = null): mixed
+    {
+        $this->filter = [
+            'stock' => $stock,
+        ];
+
+        $online = match ($online) {
+            null => '1,0',
+            true => '1',
+            false => '0',
+        };
+
+        $query = $this->all([
+            'sold_at' => $online,
+            'limit' => 1,
+        ]);
+
+        return $query['data'][0] ?? null;
+    }
+
+    public function getByVin(string $vin, bool $online = null): mixed
+    {
+        $this->filter = [
+            'vin' => $vin,
+        ];
+
+        $online = match ($online) {
+            null => '1,0',
+            true => '1',
+            false => '0',
+        };
+
+        $query = $this->all([
+            'sold_at' => $online,
+            'limit' => 1,
+        ]);
+
+        return $query['data'][0] ?? null;
+    }
+
+    public function getByStockAndVin(string $stock, string $vin, bool $online = null): mixed
     {
         $this->filter = [
             'stock' => $stock,
             'vin' => $vin,
         ];
 
+        $online = match ($online) {
+            null => '1,0',
+            true => '1',
+            false => '0',
+        };
+
         $query = $this->all([
-            'sold_at' => '1,0',
+            'sold_at' => $online,
             'limit' => 1,
         ]);
 
