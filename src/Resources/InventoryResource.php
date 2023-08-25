@@ -19,6 +19,8 @@ class InventoryResource extends BaseResource
 
     protected array $exclude = [];
 
+    protected array $with = [];
+
     public function withoutCache(): self
     {
         $this->cache = false;
@@ -40,6 +42,13 @@ class InventoryResource extends BaseResource
         return $this;
     }
 
+    public function with(array $data): self
+    {
+        $this->with = $data;
+
+        return $this;
+    }
+
     public function all(array $params = []): mixed
     {
         if (count($this->filter) > 0) {
@@ -48,6 +57,10 @@ class InventoryResource extends BaseResource
 
         if (count($this->exclude) > 0) {
             $params['exclude'] = $this->exclude;
+        }
+
+        if (count($this->with) > 0) {
+            $params['include'] = implode(',', $this->with);
         }
 
         return $this->connector->send(
