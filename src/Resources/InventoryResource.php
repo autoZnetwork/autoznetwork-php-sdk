@@ -7,6 +7,7 @@ use AutozNetwork\Requests\Inventory\CreateInventoryRequest;
 use AutozNetwork\Requests\Inventory\DeleteInventoryRequest;
 use AutozNetwork\Requests\Inventory\GetInventoryFacetsRequest;
 use AutozNetwork\Requests\Inventory\GetInventoryRequest;
+use AutozNetwork\Requests\Inventory\GetRelatedInventoryRequest;
 use AutozNetwork\Requests\Inventory\ListInventoryRequest;
 use AutozNetwork\Requests\Inventory\SearchInventoryRequest;
 use AutozNetwork\Requests\Inventory\UpdateInventoryRequest;
@@ -20,34 +21,6 @@ class InventoryResource extends BaseResource
     protected array $exclude = [];
 
     protected array $with = [];
-
-    public function withoutCache(): self
-    {
-        $this->cache = false;
-
-        return $this;
-    }
-
-    public function filter(array $data): self
-    {
-        $this->filter = $data;
-
-        return $this;
-    }
-
-    public function exclude(array $data): self
-    {
-        $this->exclude = $data;
-
-        return $this;
-    }
-
-    public function with(array $data): self
-    {
-        $this->with = $data;
-
-        return $this;
-    }
 
     public function all(array $params = []): mixed
     {
@@ -134,6 +107,11 @@ class InventoryResource extends BaseResource
         return $query['data'][0] ?? null;
     }
 
+    public function related(int $id, int $limit = 4): mixed
+    {
+        return $this->connector->send(new GetRelatedInventoryRequest($id, $limit))->json();
+    }
+
     public function create(array $data): mixed
     {
         return $this->connector->send(new CreateInventoryRequest($data))->json();
@@ -164,6 +142,34 @@ class InventoryResource extends BaseResource
     public function facets($params = []): mixed
     {
         return $this->connector->send(new GetInventoryFacetsRequest($params))->json();
+    }
+
+    public function withoutCache(): self
+    {
+        $this->cache = false;
+
+        return $this;
+    }
+
+    public function filter(array $data): self
+    {
+        $this->filter = $data;
+
+        return $this;
+    }
+
+    public function exclude(array $data): self
+    {
+        $this->exclude = $data;
+
+        return $this;
+    }
+
+    public function with(array $data): self
+    {
+        $this->with = $data;
+
+        return $this;
     }
 
     public function inStock(int $id): mixed
