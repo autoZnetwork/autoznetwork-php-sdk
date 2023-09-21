@@ -59,7 +59,7 @@ class InventoryResource extends BaseResource
         };
 
         $query = $this->all([
-            'sold_at' => $online,
+            'status' => $online,
             'limit' => 1,
         ]);
 
@@ -79,7 +79,7 @@ class InventoryResource extends BaseResource
         };
 
         $query = $this->all([
-            'sold_at' => $online,
+            'status' => $online,
             'limit' => 1,
         ]);
 
@@ -100,7 +100,7 @@ class InventoryResource extends BaseResource
         };
 
         $query = $this->all([
-            'sold_at' => $online,
+            'status' => $online,
             'limit' => 1,
         ]);
 
