@@ -1,12 +1,12 @@
 <?php
 
-namespace AutozNetwork\Requests\BodyStyles;
+namespace AutozNetwork\Requests\Categories;
 
 use AutozNetwork\Traits\RequiresOrganizationID;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
-class ListBodyStylesRequest extends Request
+class ListCategoriesRequest extends Request
 {
     use RequiresOrganizationID;
 
@@ -20,7 +20,7 @@ class ListBodyStylesRequest extends Request
 
     public function resolveEndpoint(): string
     {
-        return '/vehicle/body-styles';
+        return '/vehicle/categories';
     }
 
     public function defaultQuery(): array

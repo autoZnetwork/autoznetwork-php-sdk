@@ -4,6 +4,7 @@ namespace AutozNetwork;
 
 use AutozNetwork\Plugins\WithOrganizationID;
 use AutozNetwork\Resources\BodyStyleResource;
+use AutozNetwork\Resources\CategoryResource;
 use AutozNetwork\Resources\FeedResource;
 use AutozNetwork\Resources\InventoryResource;
 use AutozNetwork\Resources\LocationResource;
@@ -21,8 +22,8 @@ use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 class AutozNetwork extends Connector
 {
     use AcceptsJson;
-    use WithOrganizationID;
     use AlwaysThrowOnErrors;
+    use WithOrganizationID;
 
     protected string $apiBaseUrl = 'https://autoznetwork.com/api';
 
@@ -63,6 +64,11 @@ class AutozNetwork extends Connector
     public function bodyStyles(): BodyStyleResource
     {
         return new BodyStyleResource($this);
+    }
+
+    public function categories(): CategoryResource
+    {
+        return new CategoryResource($this);
     }
 
     public function feeds(): FeedResource

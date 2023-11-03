@@ -1,23 +1,23 @@
 <?php
 
-namespace AutozNetwork\Requests\BodyStyles;
+namespace AutozNetwork\Requests\Categories;
 
 use AutozNetwork\Traits\RequiresOrganizationID;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
-class GetBodyStyleRequest extends Request
+class GetCategoryRequest extends Request
 {
     use RequiresOrganizationID;
 
     protected Method $method = Method::GET;
 
-    public function __construct(public int $id)
+    public function __construct(public int|string $idOrSlug)
     {
     }
 
     public function resolveEndpoint(): string
     {
-        return "/vehicle/body-styles/$this->id";
+        return "/vehicle/categories/$this->idOrSlug";
     }
 }

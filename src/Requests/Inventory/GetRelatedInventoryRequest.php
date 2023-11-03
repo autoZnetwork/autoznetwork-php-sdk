@@ -15,7 +15,8 @@ class GetRelatedInventoryRequest extends Request
     public function __construct(
         public int $id,
         public int $limit,
-    ) {}
+    ) {
+    }
 
     public function resolveEndpoint(): string
     {
