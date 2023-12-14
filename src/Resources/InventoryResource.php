@@ -46,7 +46,7 @@ class InventoryResource extends BaseResource
         return $this->connector->send(new GetInventoryRequest($id, $params, $this->cache))->json();
     }
 
-    public function getByStock(string $stock, bool $online = null): mixed
+    public function getByStock(string $stock, ?bool $online = null): mixed
     {
         $this->filter = [
             'stock' => $stock,
@@ -66,7 +66,7 @@ class InventoryResource extends BaseResource
         return $query['data'][0] ?? null;
     }
 
-    public function getByVin(string $vin, bool $online = null): mixed
+    public function getByVin(string $vin, ?bool $online = null): mixed
     {
         $this->filter = [
             'vin' => $vin,
@@ -86,7 +86,7 @@ class InventoryResource extends BaseResource
         return $query['data'][0] ?? null;
     }
 
-    public function getByStockAndVin(string $stock, string $vin, bool $online = null): mixed
+    public function getByStockAndVin(string $stock, string $vin, ?bool $online = null): mixed
     {
         $this->filter = [
             'stock' => $stock,
@@ -127,7 +127,7 @@ class InventoryResource extends BaseResource
         return $this->connector->send(new DeleteInventoryRequest($id))->json();
     }
 
-    public function search(array $params = [], string $searchTerm = null): mixed
+    public function search(array $params = [], ?string $searchTerm = null): mixed
     {
         return $this->connector->send(
             new SearchInventoryRequest($params, $searchTerm, $this->sort, $this->direction)

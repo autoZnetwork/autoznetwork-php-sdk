@@ -29,7 +29,7 @@ class AutozNetworkAuth extends Connector
         string $clientId,
         string $clientSecret,
         string $redirectUrl,
-        string $authUrl = null,
+        ?string $authUrl = null,
     ) {
         $this->clientId = $clientId;
 

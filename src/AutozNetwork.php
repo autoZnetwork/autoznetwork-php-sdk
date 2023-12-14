@@ -35,7 +35,7 @@ class AutozNetwork extends Connector
 
     protected array $scopes = ['*'];
 
-    public function __construct($authenticator, string $apiUrl = null)
+    public function __construct($authenticator, ?string $apiUrl = null)
     {
         $this->authenticator = $authenticator;
 
