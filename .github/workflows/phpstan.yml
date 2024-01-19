@@ -4,7 +4,7 @@ on: [ push, pull_request ]
 
 jobs:
   phpstan:
-    name: Build example
+    name: Run Code Analysis
     runs-on: ubuntu-latest
     permissions:
       contents: read # for checkout to fetch code
