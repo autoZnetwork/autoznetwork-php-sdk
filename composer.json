@@ -6,6 +6,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
+            "bin\\": "bin/",
             "AutozNetwork\\": "src/",
             "AutozNetwork\\Tests\\": "tests/"
         }
@@ -24,7 +25,9 @@
     "require-dev": {
         "spatie/ray": "^1.33",
         "pestphp/pest": "^2.6",
-        "laravel/pint": "^1.10"
+        "laravel/pint": "^1.10",
+        "phpstan/phpstan": "^1.10",
+        "nette/utils": "^4.0"
     },
     "scripts": {
         "test": [
