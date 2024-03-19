@@ -16,7 +16,7 @@ trait RequiresEntityID
     {
         if (
             ! $pendingRequest->headers()->get('X-AutozNetwork-Organization-Id') &&
-            ! $pendingRequest->headers()->get('X-AutozNetwork-Entity-Id')
+            ! $pendingRequest->headers()->get('X-AutozNetwork-Enterprise-Id')
         ) {
             throw new MissingAuthenticatorException($this->getRequiresEntityId($pendingRequest));
         }
