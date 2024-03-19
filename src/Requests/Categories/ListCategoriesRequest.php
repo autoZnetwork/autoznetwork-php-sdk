@@ -2,13 +2,13 @@
 
 namespace AutozNetwork\Requests\Categories;
 
-use AutozNetwork\Traits\RequiresOrganizationID;
+use AutozNetwork\Traits\RequiresEntityID;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class ListCategoriesRequest extends Request
 {
-    use RequiresOrganizationID;
+    use RequiresEntityID;
 
     protected Method $method = Method::GET;
 
