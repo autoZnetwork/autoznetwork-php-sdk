@@ -2,6 +2,7 @@
 
 namespace AutozNetwork\Plugins;
 
+use AutozNetwork\AuthenticationType;
 use AutozNetwork\Enums\EntityType;
 use Saloon\Http\PendingRequest;
 
@@ -20,16 +21,16 @@ trait WithEntityID
         }
     }
 
-    public function entity(EntityType $entityType, ?int $entityId): static
+    public function entity(AuthenticationType $authenticationType): static
     {
-        $this->entityType = $entityType;
-        $this->entityId = $entityId;
+        $this->entityType = $authenticationType->entityType;
+        $this->entityId = $authenticationType->entityId;
 
         return $this;
     }
 
-    public function withEntity(EntityType $entityType, ?int $entityId): static
+    public function withEntity(AuthenticationType $authenticationType): static
     {
-        return $this->entity($entityType, $entityId);
+        return $this->entity($authenticationType);
     }
 }
