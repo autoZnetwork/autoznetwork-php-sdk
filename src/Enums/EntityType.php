@@ -4,7 +4,7 @@ namespace AutozNetwork\Enums;
 
 enum EntityType: string
 {
-    case ORGANIZATION = 'Organization';
+    case ORGANIZATION = 'organization';
 
-    case ENTERPRISE = 'Enterprise';
+    case ENTERPRISE = 'enterprise';
 }
