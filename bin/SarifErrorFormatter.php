@@ -17,10 +17,9 @@ class SarifErrorFormatter implements ErrorFormatter
 
     public function __construct(
         private RelativePathHelper $relativePathHelper,
-        private string             $currentWorkingDirectory,
-        private bool               $pretty,
-    )
-    {
+        private string $currentWorkingDirectory,
+        private bool $pretty,
+    ) {
     }
 
     public function formatErrors(AnalysisResult $analysisResult, Output $output): int
@@ -40,7 +39,7 @@ class SarifErrorFormatter implements ErrorFormatter
 
         $originalUriBaseIds = [
             self::URI_BASE_ID => [
-                'uri' => 'file://' . $this->currentWorkingDirectory . '/',
+                'uri' => 'file://'.$this->currentWorkingDirectory.'/',
             ],
         ];
 
