@@ -3,6 +3,7 @@
 namespace AutozNetwork;
 
 use AutozNetwork\Plugins\WithEnterpriseID;
+use AutozNetwork\Plugins\WithEntityID;
 use AutozNetwork\Plugins\WithOrganizationID;
 use AutozNetwork\Resources\BodyStyleResource;
 use AutozNetwork\Resources\CategoryResource;
@@ -24,8 +25,9 @@ class AutozNetwork extends Connector
 {
     use AcceptsJson;
     use AlwaysThrowOnErrors;
-    use WithOrganizationID;
     use WithEnterpriseID;
+    use WithEntityID;
+    use WithOrganizationID;
 
     protected string $apiBaseUrl = 'https://autoznetwork.com/api';
 
