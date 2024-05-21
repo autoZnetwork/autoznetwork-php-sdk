@@ -9,9 +9,9 @@ use AutozNetwork\Requests\Locations\ListLocationsRequest;
 
 class LocationResource extends BaseResource
 {
-    public function all(): mixed
+    public function all(array $params = []): mixed
     {
-        return $this->connector->send(new ListLocationsRequest())->json();
+        return $this->connector->send(new ListLocationsRequest($params))->json();
     }
 
     public function get(string|int $id): mixed
