@@ -12,8 +12,17 @@ class ListLocationsRequest extends Request
 
     protected Method $method = Method::GET;
 
+    public function __construct(public array $params)
+    {
+    }
+
     public function resolveEndpoint(): string
     {
         return '/locations';
+    }
+
+    public function defaultQuery(): array
+    {
+        return $this->params;
     }
 }
