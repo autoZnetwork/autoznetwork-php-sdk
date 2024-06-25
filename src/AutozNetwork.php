@@ -7,6 +7,7 @@ use AutozNetwork\Plugins\WithEntityID;
 use AutozNetwork\Plugins\WithOrganizationID;
 use AutozNetwork\Resources\BodyStyleResource;
 use AutozNetwork\Resources\CategoryResource;
+use AutozNetwork\Resources\EnterpriseResource;
 use AutozNetwork\Resources\FeedResource;
 use AutozNetwork\Resources\InventoryResource;
 use AutozNetwork\Resources\LocationResource;
@@ -80,6 +81,11 @@ class AutozNetwork extends Connector
     public function categories(): CategoryResource
     {
         return new CategoryResource($this);
+    }
+
+    public function enterprises(): EnterpriseResource
+    {
+        return new EnterpriseResource($this);
     }
 
     public function feeds(): FeedResource
