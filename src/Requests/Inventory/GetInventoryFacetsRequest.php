@@ -12,9 +12,7 @@ class GetInventoryFacetsRequest extends Request
 
     protected Method $method = Method::GET;
 
-    public function __construct(public array $params = [])
-    {
-    }
+    public function __construct(public array $params = []) {}
 
     public function resolveEndpoint(): string
     {

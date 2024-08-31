@@ -6,7 +6,5 @@ use AutozNetwork\Enums\EntityType;
 
 class AuthenticationType
 {
-    public function __construct(public EntityType $entityType, public int $entityId)
-    {
-    }
+    public function __construct(public EntityType $entityType, public int $entityId) {}
 }

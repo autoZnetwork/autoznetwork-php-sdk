@@ -11,7 +11,7 @@ class FeedResource extends BaseResource
 {
     public function all(): mixed
     {
-        return $this->connector->send(new ListFeedsRequest())->json();
+        return $this->connector->send(new ListFeedsRequest)->json();
     }
 
     public function get(int $id): mixed

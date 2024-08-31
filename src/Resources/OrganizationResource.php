@@ -10,7 +10,7 @@ class OrganizationResource extends BaseResource
 {
     public function all(): mixed
     {
-        return $this->connector->send(new ListOrganizationsRequest())->json();
+        return $this->connector->send(new ListOrganizationsRequest)->json();
     }
 
     public function get(int $id, array $params = []): mixed

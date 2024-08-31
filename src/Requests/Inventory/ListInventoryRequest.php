@@ -16,8 +16,7 @@ class ListInventoryRequest extends Request
         public array $params,
         public ?string $sort = null,
         public ?string $direction = null,
-    ) {
-    }
+    ) {}
 
     public function resolveEndpoint(): string
     {

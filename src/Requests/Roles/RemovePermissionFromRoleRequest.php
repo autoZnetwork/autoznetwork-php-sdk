@@ -12,8 +12,7 @@ class RemovePermissionFromRoleRequest extends Request
     public function __construct(
         public int $roleId,
         public int $permissionId,
-    ) {
-    }
+    ) {}
 
     public function resolveEndpoint(): string
     {

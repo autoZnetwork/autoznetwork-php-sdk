@@ -10,7 +10,7 @@ class UserResource extends BaseResource
 {
     public function all(): mixed
     {
-        return $this->connector->send(new ListUsersRequest())->json();
+        return $this->connector->send(new ListUsersRequest)->json();
     }
 
     public function get(int $id): mixed

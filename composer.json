@@ -19,15 +19,15 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^8.1",
-        "saloonphp/saloon": "^2.9"
+        "php": "^8.3",
+        "saloonphp/saloon": "^3.0"
     },
     "require-dev": {
-        "spatie/ray": "^1.33",
-        "pestphp/pest": "^2.6",
-        "laravel/pint": "^1.10",
-        "phpstan/phpstan": "^1.10",
-        "nette/utils": "^4.0"
+        "spatie/ray": "^1.41",
+        "laravel/pint": "^1.17",
+        "nette/utils": "^4.0",
+        "phpstan/phpstan": "^1.12",
+        "pestphp/pest": "^2.35"
     },
     "scripts": {
         "test": [

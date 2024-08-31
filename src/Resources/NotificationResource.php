@@ -11,7 +11,7 @@ class NotificationResource extends BaseResource
 {
     public function all(): mixed
     {
-        return $this->connector->send(new ListNotificationsRequest())->json();
+        return $this->connector->send(new ListNotificationsRequest)->json();
     }
 
     public function get(int $id): mixed
