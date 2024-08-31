@@ -15,9 +15,7 @@ class CreateNotificationRequest extends Request implements HasBody
 
     protected Method $method = Method::POST;
 
-    public function __construct(public array $data)
-    {
-    }
+    public function __construct(public array $data) {}
 
     public function resolveEndpoint(): string
     {

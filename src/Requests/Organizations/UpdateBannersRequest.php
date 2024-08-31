@@ -15,9 +15,7 @@ class UpdateBannersRequest extends Request implements HasBody
 
     protected Method $method = Method::POST;
 
-    public function __construct(public array $banners)
-    {
-    }
+    public function __construct(public array $banners) {}
 
     public function resolveEndpoint(): string
     {

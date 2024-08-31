@@ -11,7 +11,7 @@ class SyndicationResource extends BaseResource
 {
     public function all(): mixed
     {
-        return $this->connector->send(new ListSyndicationsRequest())->json();
+        return $this->connector->send(new ListSyndicationsRequest)->json();
     }
 
     public function get(int $id): mixed

@@ -19,8 +19,7 @@ class SarifErrorFormatter implements ErrorFormatter
         private RelativePathHelper $relativePathHelper,
         private string $currentWorkingDirectory,
         private bool $pretty,
-    ) {
-    }
+    ) {}
 
     public function formatErrors(AnalysisResult $analysisResult, Output $output): int
     {

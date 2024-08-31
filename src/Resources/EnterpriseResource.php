@@ -9,7 +9,7 @@ class EnterpriseResource extends BaseResource
 {
     public function all(): mixed
     {
-        return $this->connector->send(new ListEnterprisesRequest())->json();
+        return $this->connector->send(new ListEnterprisesRequest)->json();
     }
 
     public function get(int $id, array $params = []): mixed

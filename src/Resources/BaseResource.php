@@ -2,7 +2,7 @@
 
 namespace AutozNetwork\Resources;
 
-use Saloon\Contracts\Connector;
+use Saloon\Http\Connector;
 
 abstract class BaseResource
 {
@@ -10,9 +10,7 @@ abstract class BaseResource
 
     protected ?string $direction = null;
 
-    public function __construct(protected Connector $connector)
-    {
-    }
+    public function __construct(protected Connector $connector) {}
 
     public function orderBy(?string $sort, $direction = null): self
     {

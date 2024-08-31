@@ -9,7 +9,7 @@ class PermissionResource extends BaseResource
 {
     public function all(): mixed
     {
-        return $this->connector->send(new ListPermissionsRequest())->json();
+        return $this->connector->send(new ListPermissionsRequest)->json();
     }
 
     public function get(int $id): mixed

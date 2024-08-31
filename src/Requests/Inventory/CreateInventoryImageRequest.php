@@ -16,9 +16,7 @@ class CreateInventoryImageRequest extends Request
 
     protected Method $method = Method::POST;
 
-    public function __construct(public array $filters)
-    {
-    }
+    public function __construct(public array $filters) {}
 
     public function resolveEndpoint(): string
     {

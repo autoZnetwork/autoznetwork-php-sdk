@@ -12,9 +12,7 @@ class DeleteFeedRequest extends Request
 
     protected Method $method = Method::DELETE;
 
-    public function __construct(public int $id)
-    {
-    }
+    public function __construct(public int $id) {}
 
     public function resolveEndpoint(): string
     {
