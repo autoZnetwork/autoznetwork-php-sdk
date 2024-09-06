@@ -15,9 +15,7 @@ class AuditInventoryRequest extends Request implements HasBody
 
     protected Method $method = Method::POST;
 
-    public function __construct(public array $vehicles)
-    {
-    }
+    public function __construct(public array $vehicles) {}
 
     public function resolveEndpoint(): string
     {

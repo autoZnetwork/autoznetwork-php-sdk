@@ -9,7 +9,7 @@ class RoleResource extends BaseResource
 {
     public function all(): mixed
     {
-        return $this->connector->send(new ListRolesRequest())->json();
+        return $this->connector->send(new ListRolesRequest)->json();
     }
 
     public function get(int $id): mixed

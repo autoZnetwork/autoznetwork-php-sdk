@@ -15,8 +15,7 @@ class ListCategoriesRequest extends Request
     public function __construct(
         public ?string $sort = null,
         public ?string $direction = null,
-    ) {
-    }
+    ) {}
 
     public function resolveEndpoint(): string
     {

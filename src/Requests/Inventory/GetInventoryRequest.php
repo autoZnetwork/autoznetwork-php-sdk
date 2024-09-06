@@ -16,8 +16,7 @@ class GetInventoryRequest extends Request
         public int $id,
         public array $params = [],
         public bool $cache = true,
-    ) {
-    }
+    ) {}
 
     public function resolveEndpoint(): string
     {
