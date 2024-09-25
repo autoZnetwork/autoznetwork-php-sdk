@@ -30,7 +30,7 @@ class AutozNetwork extends Connector
     use WithEntityID;
     use WithOrganizationID;
 
-    protected string $apiBaseUrl = 'https://autoznetwork.com/api';
+    protected string $apiBaseUrl = 'https://api.autoznetwork.com/v1';
 
     protected string $clientId;
 
