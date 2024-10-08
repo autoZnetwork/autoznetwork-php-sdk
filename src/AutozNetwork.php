@@ -6,6 +6,7 @@ use AutozNetwork\Plugins\WithEnterpriseID;
 use AutozNetwork\Plugins\WithEntityID;
 use AutozNetwork\Plugins\WithOrganizationID;
 use AutozNetwork\Resources\BodyStyleResource;
+use AutozNetwork\Resources\CareerResource;
 use AutozNetwork\Resources\CategoryResource;
 use AutozNetwork\Resources\EnterpriseResource;
 use AutozNetwork\Resources\FeedResource;
@@ -76,6 +77,11 @@ class AutozNetwork extends Connector
     public function bodyStyles(): BodyStyleResource
     {
         return new BodyStyleResource($this);
+    }
+
+    public function careers(): CareerResource
+    {
+        return new CareerResource($this);
     }
 
     public function categories(): CategoryResource

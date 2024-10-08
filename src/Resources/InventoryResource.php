@@ -16,29 +16,13 @@ class InventoryResource extends BaseResource
 {
     protected bool $cache = true;
 
-    protected array $filter = [];
-
-    protected array $exclude = [];
-
-    protected array $with = [];
-
     public function all(array $params = []): mixed
     {
-        if (count($this->filter) > 0) {
-            $params['filter'] = $this->filter;
-        }
-
-        if (count($this->exclude) > 0) {
-            $params['exclude'] = $this->exclude;
-        }
-
-        if (count($this->with) > 0) {
-            $params['include'] = implode(',', $this->with);
-        }
-
-        return $this->connector->send(
-            new ListInventoryRequest($params, $this->sort, $this->direction)
-        )->json();
+        return $this->connector->send(new ListInventoryRequest(
+            params: $this->formatParams($params),
+            sort: $this->sort,
+            direction: $this->direction,
+        ))->json();
     }
 
     public function get(int $id, array $params = []): mixed
