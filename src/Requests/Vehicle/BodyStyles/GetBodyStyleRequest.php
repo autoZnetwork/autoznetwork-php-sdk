@@ -1,6 +1,6 @@
 <?php
 
-namespace AutozNetwork\Requests\BodyStyles;
+namespace AutozNetwork\Requests\Vehicle\BodyStyles;
 
 use AutozNetwork\Traits\RequiresEntityID;
 use Saloon\Enums\Method;
