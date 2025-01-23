@@ -1,9 +1,10 @@
 <?php
 
-namespace AutozNetwork\Resources;
+namespace AutozNetwork\Resources\Vehicle;
 
-use AutozNetwork\Requests\BodyStyles\GetBodyStyleRequest;
-use AutozNetwork\Requests\BodyStyles\ListBodyStylesRequest;
+use AutozNetwork\Requests\Vehicle\BodyStyles\GetBodyStyleRequest;
+use AutozNetwork\Requests\Vehicle\BodyStyles\ListBodyStylesRequest;
+use AutozNetwork\Resources\BaseResource;
 
 class BodyStyleResource extends BaseResource
 {

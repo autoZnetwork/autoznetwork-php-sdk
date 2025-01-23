@@ -5,7 +5,6 @@ namespace AutozNetwork;
 use AutozNetwork\Plugins\WithEnterpriseID;
 use AutozNetwork\Plugins\WithEntityID;
 use AutozNetwork\Plugins\WithOrganizationID;
-use AutozNetwork\Resources\BodyStyleResource;
 use AutozNetwork\Resources\CareerResource;
 use AutozNetwork\Resources\CategoryResource;
 use AutozNetwork\Resources\EnterpriseResource;
@@ -18,6 +17,7 @@ use AutozNetwork\Resources\PermissionResource;
 use AutozNetwork\Resources\RoleResource;
 use AutozNetwork\Resources\SyndicationResource;
 use AutozNetwork\Resources\UserResource;
+use AutozNetwork\Resources\VehicleResource;
 use Saloon\Helpers\OAuth2\OAuthConfig;
 use Saloon\Http\Connector;
 use Saloon\Traits\Plugins\AcceptsJson;
@@ -72,11 +72,6 @@ class AutozNetwork extends Connector
             ->setAuthorizeEndpoint('/oauth/authorize')
             ->setTokenEndpoint('/oauth/token')
             ->setUserEndpoint('/api/user');
-    }
-
-    public function bodyStyles(): BodyStyleResource
-    {
-        return new BodyStyleResource($this);
     }
 
     public function careers(): CareerResource
@@ -137,5 +132,10 @@ class AutozNetwork extends Connector
     public function users(): UserResource
     {
         return new UserResource($this);
+    }
+
+    public function vehicle(): VehicleResource
+    {
+        return new VehicleResource($this);
     }
 }
