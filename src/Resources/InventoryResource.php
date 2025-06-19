@@ -43,7 +43,7 @@ class InventoryResource extends BaseResource
         };
 
         $query = $this->all([
-            'status' => $online,
+            'stock_status' => $online,
             'limit' => 1,
         ]);
 
@@ -63,7 +63,7 @@ class InventoryResource extends BaseResource
         };
 
         $query = $this->all([
-            'status' => $online,
+            'stock_status' => $online,
             'limit' => 1,
         ]);
 
@@ -84,7 +84,7 @@ class InventoryResource extends BaseResource
         };
 
         $query = $this->all([
-            'status' => $online,
+            'stock_status' => $online,
             'limit' => 1,
         ]);
 
@@ -154,27 +154,6 @@ class InventoryResource extends BaseResource
         $this->with = $data;
 
         return $this;
-    }
-
-    public function inStock(int $id): mixed
-    {
-        return $this->update($id, [
-            'status' => 'in-stock',
-        ]);
-    }
-
-    public function sold(int $id): mixed
-    {
-        return $this->update($id, [
-            'status' => 'sold',
-        ]);
-    }
-
-    public function deposit(int $id): mixed
-    {
-        return $this->update($id, [
-            'status' => 'deposit',
-        ]);
     }
 
     public function active(int $id): mixed
