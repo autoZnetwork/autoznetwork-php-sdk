@@ -8,9 +8,9 @@ use AutozNetwork\Requests\Users\ListUsersRequest;
 
 class UserResource extends BaseResource
 {
-    public function all(): mixed
+    public function all(array $params = []): mixed
     {
-        return $this->connector->send(new ListUsersRequest)->json();
+        return $this->connector->send(new ListUsersRequest($params))->json();
     }
 
     public function get(int $id): mixed
