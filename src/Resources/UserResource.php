@@ -13,9 +13,9 @@ class UserResource extends BaseResource
         return $this->connector->send(new ListUsersRequest($params))->json();
     }
 
-    public function get(int $id): mixed
+    public function get(int $id, array $params = []): mixed
     {
-        return $this->connector->send(new GetUserRequest($id))->json();
+        return $this->connector->send(new GetUserRequest($id, $params))->json();
     }
 
     public function delete(int $id): mixed
