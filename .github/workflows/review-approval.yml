@@ -12,7 +12,7 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         name: Approve LGTM Review
         if: contains(github.event.comment.body, 'LGTM')
         with:
