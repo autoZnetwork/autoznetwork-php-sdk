@@ -26,7 +26,6 @@
         "spatie/ray": "^1.41",
         "laravel/pint": "^1.17",
         "nette/utils": "^4.0",
-        "phpstan/phpstan": "^2.0",
         "pestphp/pest": "^4.0"
     },
     "scripts": {
