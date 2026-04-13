@@ -16,7 +16,7 @@ class GetInventoryFacetsRequest extends Request
 
     public function resolveEndpoint(): string
     {
-        return '/inventory_facets';
+        return '/inventory/facets';
     }
 
     public function defaultQuery(): array
