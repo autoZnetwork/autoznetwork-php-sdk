@@ -6,7 +6,6 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "bin\\": "bin/",
             "AutozNetwork\\": "src/",
             "AutozNetwork\\Tests\\": "tests/"
         }
