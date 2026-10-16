@@ -12,7 +12,7 @@ trait WithOrganizationID
     {
         if (! is_null($this->organizationId)) {
             $pendingRequest->headers()->merge([
-                'X-AutozNetwork-Organization-Id' => $this->organizationId,
+                'X-AutozNetwork-Organization-Id' => (string) $this->organizationId,
             ]);
         }
     }

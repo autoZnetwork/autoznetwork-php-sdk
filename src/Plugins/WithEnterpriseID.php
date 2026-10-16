@@ -12,7 +12,7 @@ trait WithEnterpriseID
     {
         if (! is_null($this->enterpriseId)) {
             $pendingRequest->headers()->merge([
-                'X-AutozNetwork-Enterprise-Id' => $this->enterpriseId,
+                'X-AutozNetwork-Enterprise-Id' => (string) $this->enterpriseId,
             ]);
         }
     }

@@ -16,7 +16,7 @@ trait WithEntityID
     {
         if (! is_null($this->entityType) && ! is_null($this->entityId)) {
             $pendingRequest->headers()->merge([
-                "X-AutozNetwork-{$this->entityType->value}-Id" => $this->entityId,
+                "X-AutozNetwork-{$this->entityType->value}-Id" => (string) $this->entityId,
             ]);
         }
     }
