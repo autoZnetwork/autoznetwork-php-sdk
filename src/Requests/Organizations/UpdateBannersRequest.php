@@ -1,28 +1,39 @@
 <?php
 
-namespace AutozNetwork\Requests\Organizations;
+namespace Autoznetwork\AutozNetwork\Requests\Organizations;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
+/**
+ * Replace the organization's search banners (the endpoint keeps its historical name).
+ */
 class UpdateBannersRequest extends Request implements HasBody
 {
     use HasJsonBody;
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::POST;
 
-    public function __construct(public array $banners) {}
+    /**
+     * @param  array<int, array<string, mixed>>  $banners
+     */
+    public function __construct(
+        protected readonly array $banners,
+    ) {}
 
     public function resolveEndpoint(): string
     {
         return '/organizations/algolia-banners';
     }
 
-    public function defaultBody(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultBody(): array
     {
         return [
             'banners' => $this->banners,

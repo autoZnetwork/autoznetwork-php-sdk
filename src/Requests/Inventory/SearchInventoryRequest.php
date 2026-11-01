@@ -1,22 +1,28 @@
 <?php
 
-namespace AutozNetwork\Requests\Inventory;
+namespace Autoznetwork\AutozNetwork\Requests\Inventory;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
+/**
+ * Full-text search over inventory.
+ */
 class SearchInventoryRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
+    /**
+     * @param  array<string, mixed>  $params
+     */
     public function __construct(
-        public array $params,
-        public ?string $searchTerm = null,
-        public ?string $sort = null,
-        public ?string $direction = null,
+        protected readonly array $params = [],
+        protected readonly ?string $searchTerm = null,
+        protected readonly ?string $sort = null,
+        protected readonly ?string $direction = null,
     ) {}
 
     public function resolveEndpoint(): string
@@ -24,18 +30,21 @@ class SearchInventoryRequest extends Request
         return '/inventory/search';
     }
 
-    public function defaultQuery(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultQuery(): array
     {
-        $this->params['query'] = $this->searchTerm;
+        $query = [...$this->params, 'query' => $this->searchTerm];
 
-        if ($this->sort) {
-            $this->params['sort'] = $this->sort;
+        if ($this->sort !== null) {
+            $query['sort'] = $this->sort;
 
-            if ($this->direction) {
-                $this->params['sort_direction'] = $this->direction;
+            if ($this->direction !== null) {
+                $query['sort_direction'] = $this->direction;
             }
         }
 
-        return $this->params;
+        return $query;
     }
 }

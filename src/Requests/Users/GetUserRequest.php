@@ -1,25 +1,34 @@
 <?php
 
-namespace AutozNetwork\Requests\Users;
+namespace Autoznetwork\AutozNetwork\Requests\Users;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class GetUserRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
-    public function __construct(public int $id, public array $params) {}
+    /**
+     * @param  array<string, mixed>  $params
+     */
+    public function __construct(
+        protected readonly int $id,
+        protected readonly array $params = [],
+    ) {}
 
     public function resolveEndpoint(): string
     {
         return "/users/$this->id";
     }
 
-    public function defaultQuery(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultQuery(): array
     {
         return $this->params;
     }

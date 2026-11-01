@@ -1,31 +1,38 @@
 <?php
 
-namespace AutozNetwork\Requests\Users;
+namespace Autoznetwork\AutozNetwork\Requests\Users;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class GetUserByEmailRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
-    public function __construct(public string $email, public array $params) {}
+    /**
+     * @param  array<string, mixed>  $params
+     */
+    public function __construct(
+        protected readonly string $email,
+        protected readonly array $params = [],
+    ) {}
 
     public function resolveEndpoint(): string
     {
         return '/users/email';
     }
 
-    public function defaultQuery(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultQuery(): array
     {
         return [
             ...$this->params,
-            ...[
-                'email' => $this->email,
-            ],
+            'email' => $this->email,
         ];
     }
 }

@@ -1,20 +1,23 @@
 <?php
 
-namespace AutozNetwork\Requests\Inventory;
+namespace Autoznetwork\AutozNetwork\Requests\Inventory;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
+/**
+ * Vehicles similar to one vehicle, for "you may also like" rails.
+ */
 class GetRelatedInventoryRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
     public function __construct(
-        public int $id,
-        public int $limit,
+        protected readonly int $id,
+        protected readonly int $limit = 4,
     ) {}
 
     public function resolveEndpoint(): string
@@ -22,7 +25,10 @@ class GetRelatedInventoryRequest extends Request
         return "/inventory/$this->id/related";
     }
 
-    public function defaultQuery(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultQuery(): array
     {
         return [
             'limit' => $this->limit,

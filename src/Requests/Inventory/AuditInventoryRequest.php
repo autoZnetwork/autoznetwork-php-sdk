@@ -1,28 +1,39 @@
 <?php
 
-namespace AutozNetwork\Requests\Inventory;
+namespace Autoznetwork\AutozNetwork\Requests\Inventory;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
+/**
+ * Compare a list of vehicles against inventory and report the differences.
+ */
 class AuditInventoryRequest extends Request implements HasBody
 {
     use HasJsonBody;
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::POST;
 
-    public function __construct(public array $vehicles) {}
+    /**
+     * @param  array<int, array<string, mixed>>  $vehicles
+     */
+    public function __construct(
+        protected readonly array $vehicles,
+    ) {}
 
     public function resolveEndpoint(): string
     {
         return '/inventory/audit';
     }
 
-    public function defaultBody(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultBody(): array
     {
         return [
             'vehicles' => $this->vehicles,

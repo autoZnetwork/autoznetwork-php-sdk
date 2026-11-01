@@ -1,21 +1,25 @@
 <?php
 
-namespace AutozNetwork\Requests\Inventory;
+namespace Autoznetwork\AutozNetwork\Requests\Inventory;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class GetInventoryRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
+    /**
+     * @param  array<string, mixed>  $params
+     * @param  bool  $cache  false asks the API for a fresh copy (`no-cache`)
+     */
     public function __construct(
-        public int $id,
-        public array $params = [],
-        public bool $cache = true,
+        protected readonly int $id,
+        protected readonly array $params = [],
+        protected readonly bool $cache = true,
     ) {}
 
     public function resolveEndpoint(): string
@@ -23,12 +27,13 @@ class GetInventoryRequest extends Request
         return "/inventory/$this->id";
     }
 
-    public function defaultQuery(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultQuery(): array
     {
-        if (! $this->cache) {
-            $this->params['no-cache'] = $this->cache;
-        }
-
-        return $this->params;
+        return $this->cache
+            ? $this->params
+            : [...$this->params, 'no-cache' => false];
     }
 }
