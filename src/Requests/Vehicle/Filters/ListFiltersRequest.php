@@ -1,30 +1,39 @@
 <?php
 
-namespace AutozNetwork\Requests\Vehicle\Filters;
+namespace Autoznetwork\AutozNetwork\Requests\Vehicle\Filters;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
+/**
+ * The filter groups (makes, body styles, price bands, ...) a storefront can offer.
+ */
 class ListFiltersRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
-    public function __construct(public array $only = []) {}
+    /**
+     * @param  list<string>  $only
+     */
+    public function __construct(
+        protected readonly array $only = [],
+    ) {}
 
     public function resolveEndpoint(): string
     {
         return '/vehicle/filters';
     }
 
-    public function defaultQuery(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultQuery(): array
     {
-        return array_filter([
-            'only' => count($this->only) > 0
-                ? implode(',', $this->only)
-                : null,
-        ]);
+        return $this->only === []
+            ? []
+            : ['only' => implode(',', $this->only)];
     }
 }

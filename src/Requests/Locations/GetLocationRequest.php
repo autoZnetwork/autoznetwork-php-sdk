@@ -1,18 +1,20 @@
 <?php
 
-namespace AutozNetwork\Requests\Locations;
+namespace Autoznetwork\AutozNetwork\Requests\Locations;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class GetLocationRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
-    public function __construct(public int $id) {}
+    public function __construct(
+        protected readonly int $id,
+    ) {}
 
     public function resolveEndpoint(): string
     {

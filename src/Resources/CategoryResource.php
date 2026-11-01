@@ -1,10 +1,13 @@
 <?php
 
-namespace AutozNetwork\Resources;
+namespace Autoznetwork\AutozNetwork\Resources;
 
-use AutozNetwork\Requests\Categories\GetCategoryRequest;
-use AutozNetwork\Requests\Categories\ListCategoriesRequest;
+use Autoznetwork\AutozNetwork\Requests\Categories\GetCategoryRequest;
+use Autoznetwork\AutozNetwork\Requests\Categories\ListCategoriesRequest;
 
+/**
+ * Vehicle categories (car, truck, RV, ...), as `/vehicle/categories`.
+ */
 class CategoryResource extends BaseResource
 {
     public function all(): mixed

@@ -1,45 +1,39 @@
 <?php
 
-namespace AutozNetwork;
+namespace Autoznetwork\AutozNetwork;
 
 use Saloon\Helpers\OAuth2\OAuthConfig;
 use Saloon\Http\Connector;
 use Saloon\Traits\OAuth2\AuthorizationCodeGrant;
+use SensitiveParameter;
 
+/**
+ * OAuth2 authorization-code client for signing users in through autoZnetwork.
+ *
+ * `getAuthorizationUrl()`, `getAccessToken()`, `refreshAccessToken()` and
+ * `getUser()` come from Saloon's AuthorizationCodeGrant. The access token it
+ * returns is an Authenticator the API client accepts directly.
+ */
 class AutozNetworkAuth extends Connector
 {
     use AuthorizationCodeGrant;
 
-    protected string $apiBaseUrl = 'https://autoznetwork.com';
+    public const string DEFAULT_AUTH_URL = 'https://autoznetwork.com';
 
-    private string $clientId;
-
-    private string $clientSecret;
-
-    private string $redirectUrl;
-
-    private array $scopes = ['*'];
+    /**
+     * @param  list<string>  $scopes
+     */
+    public function __construct(
+        protected readonly string $clientId,
+        #[SensitiveParameter] protected readonly string $clientSecret,
+        protected readonly string $redirectUrl,
+        protected readonly ?string $authUrl = null,
+        protected readonly array $scopes = ['*'],
+    ) {}
 
     public function resolveBaseUrl(): string
     {
-        return $this->apiBaseUrl;
-    }
-
-    public function __construct(
-        string $clientId,
-        string $clientSecret,
-        string $redirectUrl,
-        ?string $authUrl = null,
-    ) {
-        $this->clientId = $clientId;
-
-        $this->clientSecret = $clientSecret;
-
-        $this->redirectUrl = $redirectUrl;
-
-        if (! is_null($authUrl)) {
-            $this->apiBaseUrl = $authUrl;
-        }
+        return rtrim($this->authUrl ?: self::DEFAULT_AUTH_URL, '/');
     }
 
     protected function defaultOauthConfig(): OAuthConfig
@@ -53,16 +47,4 @@ class AutozNetworkAuth extends Connector
             ->setTokenEndpoint('/oauth/token')
             ->setUserEndpoint('/api/user');
     }
-
-    //    public function scopes(array $scopes): static
-    //    {
-    //        $this->scopes = $scopes;
-    //
-    //        return $this;
-    //    }
-    //
-    //    public function setScopes(array $scopes): static
-    //    {
-    //        return $this->scopes($scopes);
-    //    }
 }

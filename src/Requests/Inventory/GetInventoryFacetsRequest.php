@@ -1,25 +1,36 @@
 <?php
 
-namespace AutozNetwork\Requests\Inventory;
+namespace Autoznetwork\AutozNetwork\Requests\Inventory;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
+/**
+ * Counts per make, model, body style and so on for the current filters.
+ */
 class GetInventoryFacetsRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
-    public function __construct(public array $params = []) {}
+    /**
+     * @param  array<string, mixed>  $params
+     */
+    public function __construct(
+        protected readonly array $params = [],
+    ) {}
 
     public function resolveEndpoint(): string
     {
         return '/inventory/facets';
     }
 
-    public function defaultQuery(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultQuery(): array
     {
         return $this->params;
     }

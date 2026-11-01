@@ -1,41 +1,66 @@
 {
     "name": "autoznetwork/autoznetwork-php-sdk",
-    "description": "autoZnetwork PHP SDK",
+    "description": "PHP SDK for the autoZnetwork API",
     "type": "library",
     "homepage": "https://github.com/autoznetwork/autoznetwork-php-sdk",
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "AutozNetwork\\": "src/",
-            "AutozNetwork\\Tests\\": "tests/"
-        }
-    },
+    "keywords": ["autoznetwork", "sdk", "saloon", "inventory", "dealership"],
     "authors": [
         {
             "name": "collinped",
             "email": "collin@autoznetwork.com"
+        },
+        {
+            "name": "Chris O'Brien",
+            "email": "support@autoznetwork.com"
         }
     ],
     "minimum-stability": "stable",
     "require": {
         "php": "^8.3",
+        "illuminate/contracts": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0",
         "saloonphp/saloon": "^4.0"
     },
     "require-dev": {
-        "spatie/ray": "^1.41",
-        "laravel/pint": "^1.17",
-        "nette/utils": "^4.0",
+        "laravel/pint": "^1.19",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
         "pestphp/pest": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Autoznetwork\\AutozNetwork\\": "src/",
+            "AutozNetwork\\": "compat/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Autoznetwork\\AutozNetwork\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Autoznetwork\\AutozNetwork\\Laravel\\AutozNetworkServiceProvider"
+            ],
+            "aliases": {
+                "AutozNetwork": "Autoznetwork\\AutozNetwork\\Laravel\\Facades\\AutozNetwork"
+            }
+        }
     },
     "scripts": {
         "test": [
             "./vendor/bin/pest"
+        ],
+        "lint": [
+            "./vendor/bin/pint --test"
         ],
         "fix-code": [
             "./vendor/bin/pint"
         ]
     },
     "config": {
+        "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }

@@ -1,14 +1,14 @@
 <?php
 
-namespace AutozNetwork\Requests\Syndications;
+namespace Autoznetwork\AutozNetwork\Requests\Syndications;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class ListSyndicationsRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 

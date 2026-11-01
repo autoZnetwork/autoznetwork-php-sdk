@@ -1,25 +1,33 @@
 <?php
 
-namespace AutozNetwork\Requests\Locations;
+namespace Autoznetwork\AutozNetwork\Requests\Locations;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class ListLocationsRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
-    public function __construct(public array $params) {}
+    /**
+     * @param  array<string, mixed>  $params
+     */
+    public function __construct(
+        protected readonly array $params = [],
+    ) {}
 
     public function resolveEndpoint(): string
     {
         return '/locations';
     }
 
-    public function defaultQuery(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultQuery(): array
     {
         return $this->params;
     }

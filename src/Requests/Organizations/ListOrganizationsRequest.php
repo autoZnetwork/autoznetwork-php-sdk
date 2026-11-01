@@ -1,6 +1,6 @@
 <?php
 
-namespace AutozNetwork\Requests\Organizations;
+namespace Autoznetwork\AutozNetwork\Requests\Organizations;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;

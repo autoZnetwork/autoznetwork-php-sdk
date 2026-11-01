@@ -1,10 +1,9 @@
 <?php
 
-namespace AutozNetwork\Resources\Vehicle;
+namespace Autoznetwork\AutozNetwork\Resources\Vehicle;
 
-use AutozNetwork\Requests\Vehicle\BodyStyles\GetBodyStyleRequest;
-use AutozNetwork\Requests\Vehicle\BodyStyles\ListBodyStylesRequest;
-use AutozNetwork\Resources\BaseResource;
+use Autoznetwork\AutozNetwork\Requests\Vehicle\BodyStyles\ListBodyStylesRequest;
+use Autoznetwork\AutozNetwork\Resources\BaseResource;
 
 class BodyStyleResource extends BaseResource
 {
@@ -14,10 +13,5 @@ class BodyStyleResource extends BaseResource
             sort: $this->sort,
             direction: $this->direction,
         ))->json();
-    }
-
-    public function get(int $id): mixed
-    {
-        return $this->connector->send(new GetBodyStyleRequest($id))->json();
     }
 }

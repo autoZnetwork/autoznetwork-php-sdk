@@ -1,21 +1,24 @@
 <?php
 
-namespace AutozNetwork\Requests\Inventory;
+namespace Autoznetwork\AutozNetwork\Requests\Inventory;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class ListInventoryRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
+    /**
+     * @param  array<string, mixed>  $params
+     */
     public function __construct(
-        public array $params,
-        public ?string $sort = null,
-        public ?string $direction = null,
+        protected readonly array $params = [],
+        protected readonly ?string $sort = null,
+        protected readonly ?string $direction = null,
     ) {}
 
     public function resolveEndpoint(): string
@@ -23,16 +26,21 @@ class ListInventoryRequest extends Request
         return '/inventory';
     }
 
-    public function defaultQuery(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultQuery(): array
     {
-        if ($this->sort) {
-            $this->params['sort'] = $this->sort;
+        $query = $this->params;
 
-            if ($this->direction) {
-                $this->params['sort_direction'] = $this->direction;
+        if ($this->sort !== null) {
+            $query['sort'] = $this->sort;
+
+            if ($this->direction !== null) {
+                $query['sort_direction'] = $this->direction;
             }
         }
 
-        return $this->params;
+        return $query;
     }
 }

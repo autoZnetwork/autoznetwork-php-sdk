@@ -1,10 +1,13 @@
 <?php
 
-namespace AutozNetwork\Resources;
+namespace Autoznetwork\AutozNetwork\Resources;
 
-use AutozNetwork\Resources\Vehicle\BodyStyleResource;
-use AutozNetwork\Resources\Vehicle\FilterResource;
+use Autoznetwork\AutozNetwork\Resources\Vehicle\BodyStyleResource;
+use Autoznetwork\AutozNetwork\Resources\Vehicle\FilterResource;
 
+/**
+ * Reference data about vehicles: body styles and search filters.
+ */
 class VehicleResource extends BaseResource
 {
     public function bodyStyles(): BodyStyleResource
