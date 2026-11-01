@@ -1,20 +1,20 @@
 <?php
 
-namespace AutozNetwork\Requests\Categories;
+namespace Autoznetwork\AutozNetwork\Requests\Categories;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class ListCategoriesRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
     public function __construct(
-        public ?string $sort = null,
-        public ?string $direction = null,
+        protected readonly ?string $sort = null,
+        protected readonly ?string $direction = null,
     ) {}
 
     public function resolveEndpoint(): string
@@ -22,18 +22,21 @@ class ListCategoriesRequest extends Request
         return '/vehicle/categories';
     }
 
-    public function defaultQuery(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultQuery(): array
     {
-        $returnArr = [];
+        $query = [];
 
-        if ($this->sort) {
-            $returnArr['sort'] = $this->sort;
+        if ($this->sort !== null) {
+            $query['sort'] = $this->sort;
 
-            if ($this->direction) {
-                $returnArr['sort_direction'] = $this->direction;
+            if ($this->direction !== null) {
+                $query['sort_direction'] = $this->direction;
             }
         }
 
-        return $returnArr;
+        return $query;
     }
 }

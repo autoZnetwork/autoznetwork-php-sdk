@@ -1,77 +1,92 @@
 <?php
 
-namespace AutozNetwork;
+namespace Autoznetwork\AutozNetwork;
 
-use AutozNetwork\Plugins\WithEnterpriseID;
-use AutozNetwork\Plugins\WithEntityID;
-use AutozNetwork\Plugins\WithOrganizationID;
-use AutozNetwork\Resources\CareerResource;
-use AutozNetwork\Resources\CategoryResource;
-use AutozNetwork\Resources\EnterpriseResource;
-use AutozNetwork\Resources\FeedResource;
-use AutozNetwork\Resources\InventoryResource;
-use AutozNetwork\Resources\LocationResource;
-use AutozNetwork\Resources\NotificationResource;
-use AutozNetwork\Resources\OrganizationResource;
-use AutozNetwork\Resources\PermissionResource;
-use AutozNetwork\Resources\RoleResource;
-use AutozNetwork\Resources\SyndicationResource;
-use AutozNetwork\Resources\UserResource;
-use AutozNetwork\Resources\VehicleResource;
-use Saloon\Helpers\OAuth2\OAuthConfig;
+use Autoznetwork\AutozNetwork\Concerns\ClonesRequestProperties;
+use Autoznetwork\AutozNetwork\Concerns\SummarizesNonJsonErrors;
+use Autoznetwork\AutozNetwork\Enums\EntityType;
+use Autoznetwork\AutozNetwork\Plugins\WithEnterpriseId;
+use Autoznetwork\AutozNetwork\Plugins\WithOrganizationId;
+use Autoznetwork\AutozNetwork\Resources\CareerResource;
+use Autoznetwork\AutozNetwork\Resources\CategoryResource;
+use Autoznetwork\AutozNetwork\Resources\EnterpriseResource;
+use Autoznetwork\AutozNetwork\Resources\FeedResource;
+use Autoznetwork\AutozNetwork\Resources\InventoryResource;
+use Autoznetwork\AutozNetwork\Resources\LocationResource;
+use Autoznetwork\AutozNetwork\Resources\OrganizationResource;
+use Autoznetwork\AutozNetwork\Resources\SyndicationResource;
+use Autoznetwork\AutozNetwork\Resources\UserResource;
+use Autoznetwork\AutozNetwork\Resources\VehicleResource;
+use NoDiscard;
+use Saloon\Contracts\Authenticator;
 use Saloon\Http\Connector;
 use Saloon\Traits\Plugins\AcceptsJson;
 use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
+use Saloon\Traits\Plugins\HasTimeout;
 
+/**
+ * Client for the autoZnetwork API.
+ *
+ * Authenticate with an API token (`TokenAuthenticator`) or a user's OAuth
+ * access token from `AutozNetworkAuth`. Most endpoints act on one organization
+ * or enterprise, sent in the `X-AutozNetwork-Organization-Id` or
+ * `X-AutozNetwork-Enterprise-Id` header: `withOrganization()`,
+ * `withEnterprise()` and `withEntity()` return a new, scoped client and leave
+ * this one untouched, so a container-bound instance can be shared safely.
+ * Every error status throws one of Saloon's status exceptions.
+ */
 class AutozNetwork extends Connector
 {
     use AcceptsJson;
     use AlwaysThrowOnErrors;
-    use WithEnterpriseID;
-    use WithEntityID;
-    use WithOrganizationID;
+    use ClonesRequestProperties;
+    use HasTimeout;
+    use SummarizesNonJsonErrors;
+    use WithEnterpriseId;
+    use WithOrganizationId;
 
-    protected string $apiBaseUrl = 'https://api.autoznetwork.com/v1';
+    public const string DEFAULT_API_URL = 'https://api.autoznetwork.com/v1';
 
-    protected string $clientId;
+    protected int $connectTimeout = 5;
 
-    protected string $clientSecret;
+    protected int $requestTimeout = 30;
 
-    protected string $redirectUrl;
-
-    protected array $scopes = ['*'];
-
+    /**
+     * @param  Authenticator  $authenticator  An API token or a user's OAuth authenticator.
+     * @param  string|null  $apiUrl  API origin including the version prefix; defaults to production.
+     */
     public function __construct(
-        $authenticator,
-        ?string $apiUrl = null,
-        ?AuthenticationType $authenticationType = null,
+        Authenticator $authenticator,
+        protected readonly ?string $apiUrl = null,
+        ?int $connectTimeout = null,
+        ?int $requestTimeout = null,
     ) {
-        $this->authenticator = $authenticator;
+        $this->authenticate($authenticator);
 
-        if (! is_null($apiUrl)) {
-            $this->apiBaseUrl = $apiUrl;
-        }
-
-        if (! is_null($authenticationType)) {
-            $this->entity($authenticationType);
-        }
+        $this->connectTimeout = $connectTimeout ?? $this->connectTimeout;
+        $this->requestTimeout = $requestTimeout ?? $this->requestTimeout;
     }
 
     public function resolveBaseUrl(): string
     {
-        return $this->apiBaseUrl;
+        return rtrim($this->apiUrl ?: self::DEFAULT_API_URL, '/');
     }
 
-    protected function defaultOauthConfig(): OAuthConfig
+    protected function serviceName(): string
     {
-        return OAuthConfig::make()
-            ->setClientId($this->clientId)
-            ->setClientSecret($this->clientSecret)
-            ->setRedirectUri($this->redirectUrl)
-            ->setDefaultScopes($this->scopes)
-            ->setAuthorizeEndpoint('/oauth/authorize')
-            ->setTokenEndpoint('/oauth/token')
-            ->setUserEndpoint('/api/user');
+        return 'autoZnetwork';
+    }
+
+    /**
+     * A copy of this client scoped to an organization or an enterprise.
+     */
+    #[NoDiscard('withEntity() returns a new client; the one it was called on is unchanged')]
+    public function withEntity(EntityType $type, int|string $id): static
+    {
+        return match ($type) {
+            EntityType::ORGANIZATION => $this->withOrganization($id),
+            EntityType::ENTERPRISE => $this->withEnterprise($id),
+        };
     }
 
     public function careers(): CareerResource
@@ -104,24 +119,9 @@ class AutozNetwork extends Connector
         return new LocationResource($this);
     }
 
-    public function notifications(): NotificationResource
-    {
-        return new NotificationResource($this);
-    }
-
     public function organizations(): OrganizationResource
     {
         return new OrganizationResource($this);
-    }
-
-    public function permissions(): PermissionResource
-    {
-        return new PermissionResource($this);
-    }
-
-    public function roles(): RoleResource
-    {
-        return new RoleResource($this);
     }
 
     public function syndications(): SyndicationResource

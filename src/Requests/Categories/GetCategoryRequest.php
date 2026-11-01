@@ -1,18 +1,20 @@
 <?php
 
-namespace AutozNetwork\Requests\Categories;
+namespace Autoznetwork\AutozNetwork\Requests\Categories;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class GetCategoryRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
-    public function __construct(public int|string $idOrSlug) {}
+    public function __construct(
+        protected readonly int|string $idOrSlug,
+    ) {}
 
     public function resolveEndpoint(): string
     {

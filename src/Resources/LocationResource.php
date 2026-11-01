@@ -1,28 +1,38 @@
 <?php
 
-namespace AutozNetwork\Resources;
+namespace Autoznetwork\AutozNetwork\Resources;
 
-use AutozNetwork\Requests\Locations\CreateLocationRequest;
-use AutozNetwork\Requests\Locations\DeleteLocationRequest;
-use AutozNetwork\Requests\Locations\GetLocationRequest;
-use AutozNetwork\Requests\Locations\ListLocationsRequest;
+use Autoznetwork\AutozNetwork\Requests\Locations\CreateLocationRequest;
+use Autoznetwork\AutozNetwork\Requests\Locations\DeleteLocationRequest;
+use Autoznetwork\AutozNetwork\Requests\Locations\GetLocationRequest;
+use Autoznetwork\AutozNetwork\Requests\Locations\ListLocationsRequest;
 
+/**
+ * An organization's rooftops.
+ */
 class LocationResource extends BaseResource
 {
+    /**
+     * @param  array<string, mixed>  $params
+     */
     public function all(array $params = []): mixed
     {
-        return $this->connector->send(new ListLocationsRequest($params))->json();
+        return $this->connector->send(new ListLocationsRequest($this->formatParams($params)))->json();
     }
 
-    public function get(string|int $id): mixed
+    /**
+     * By id, or by a slug that starts with the id (`12-main-street`).
+     */
+    public function get(int|string $id): mixed
     {
-        $id = is_numeric($id)
-            ? $id
-            : explode('-', $id)[0];
+        $id = is_numeric($id) ? (int) $id : (int) explode('-', (string) $id)[0];
 
         return $this->connector->send(new GetLocationRequest($id))->json();
     }
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     public function create(array $data): mixed
     {
         return $this->connector->send(new CreateLocationRequest($data))->json();

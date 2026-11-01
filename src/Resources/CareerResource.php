@@ -1,8 +1,8 @@
 <?php
 
-namespace AutozNetwork\Resources;
+namespace Autoznetwork\AutozNetwork\Resources;
 
-use AutozNetwork\Resources\Careers\CareerPostResource;
+use Autoznetwork\AutozNetwork\Resources\Careers\CareerPostResource;
 
 class CareerResource extends BaseResource
 {

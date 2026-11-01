@@ -1,21 +1,23 @@
 <?php
 
-namespace AutozNetwork\Requests\Inventory;
+namespace Autoznetwork\AutozNetwork\Requests\Inventory;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class DeleteInventoryRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::DELETE;
 
-    public function __construct(public int $id) {}
+    public function __construct(
+        protected readonly int $id,
+    ) {}
 
     public function resolveEndpoint(): string
     {
-        return '/inventory/'.$this->id;
+        return "/inventory/$this->id";
     }
 }

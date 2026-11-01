@@ -1,14 +1,14 @@
 <?php
 
-namespace AutozNetwork\Requests\Feeds;
+namespace Autoznetwork\AutozNetwork\Requests\Feeds;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class ListFeedsRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 

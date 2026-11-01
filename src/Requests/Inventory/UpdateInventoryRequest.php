@@ -1,8 +1,8 @@
 <?php
 
-namespace AutozNetwork\Requests\Inventory;
+namespace Autoznetwork\AutozNetwork\Requests\Inventory;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -11,13 +11,16 @@ use Saloon\Traits\Body\HasJsonBody;
 class UpdateInventoryRequest extends Request implements HasBody
 {
     use HasJsonBody;
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::PUT;
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     public function __construct(
-        public int $id,
-        public array $data,
+        protected readonly int $id,
+        protected readonly array $data,
     ) {}
 
     public function resolveEndpoint(): string
@@ -25,7 +28,10 @@ class UpdateInventoryRequest extends Request implements HasBody
         return "/inventory/$this->id";
     }
 
-    public function defaultBody(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultBody(): array
     {
         return $this->data;
     }

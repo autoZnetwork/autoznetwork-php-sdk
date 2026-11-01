@@ -1,21 +1,27 @@
 <?php
 
-namespace AutozNetwork\Requests\Careers\Posts;
+namespace Autoznetwork\AutozNetwork\Requests\Careers\Posts;
 
-use AutozNetwork\Traits\RequiresEntityID;
+use Autoznetwork\AutozNetwork\Traits\RequiresEntityId;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
+/**
+ * Job posts that are active and listed, for careers pages.
+ */
 class ListCareerPostsRequest extends Request
 {
-    use RequiresEntityID;
+    use RequiresEntityId;
 
     protected Method $method = Method::GET;
 
+    /**
+     * @param  array<string, mixed>  $params
+     */
     public function __construct(
-        public array $params,
-        public ?string $sort = null,
-        public ?string $direction = null,
+        protected readonly array $params = [],
+        protected readonly ?string $sort = null,
+        protected readonly ?string $direction = null,
     ) {}
 
     public function resolveEndpoint(): string
@@ -23,29 +29,27 @@ class ListCareerPostsRequest extends Request
         return '/careers/posts';
     }
 
-    protected function defaultFilters(): array
+    /**
+     * @return array<string, mixed>
+     */
+    protected function defaultQuery(): array
     {
-        return [
-            'filter' => [
-                'active' => true,
-                'listing.active' => true,
-            ],
-        ];
-    }
+        $query = $this->params;
 
-    public function defaultQuery(): array
-    {
-        if ($this->sort) {
-            $this->params['sort'] = $this->sort;
+        if ($this->sort !== null) {
+            $query['sort'] = $this->sort;
 
-            if ($this->direction) {
-                $this->params['sort_direction'] = $this->direction;
+            if ($this->direction !== null) {
+                $query['sort_direction'] = $this->direction;
             }
         }
 
-        return [
-            ...$this->params,
-            ...$this->defaultFilters(),
+        $query['filter'] = [
+            'active' => true,
+            'listing.active' => true,
+            ...($query['filter'] ?? []),
         ];
+
+        return $query;
     }
 }
